@@ -4,16 +4,24 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Alert from './components/layout/Alert';
+// Redux
+// Provider combines React and Redux
+import { Provider } from 'react-redux';
+import store from './store';
+
 import './App.css';
 
 function App() {
   return (
+    <Provider store={store}>
     //fragment is a ghost element that won't show up in the dom
     <Router>
       <Fragment>
         <Navbar />
         <Route exact path="/" component={Landing} />
         <section className="container">
+          <Alert />
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -21,6 +29,7 @@ function App() {
         </section>
       </Fragment>
     </Router>
+    </Provider>
   );
 }
 
