@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import logo from '../../img/dog-logo-2.svg';
+import '../../App.css';
+
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
@@ -28,11 +31,20 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
 
+  const logoStyle = {
+    width: "40px",
+    filter: "invert(100%)",
+    color: "white",
+    marginTop: "5px",
+    marginRight: "10px",
+  }
+
     return (
     <nav className="navbar bg-dark">
       <h1>
         <Link to='/'>
-            <i className="fas fa-code"></i> PuppyPal
+        <img style={logoStyle} className="dog-logo" src={logo} alt="dog-icon"/>
+            PuppyPal
         </Link>
       </h1>
       { !loading && (<Fragment>{ isAuthenticated ? authLinks: guestLinks }</Fragment>) }

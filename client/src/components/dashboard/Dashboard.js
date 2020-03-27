@@ -15,8 +15,12 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     return loading && profile === null ? <Spinner /> : <Fragment>
         <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">
-            <i className="fas fa-user"></i> Welcome { user && user.name }
+            <i className="fas fa-user"></i> Welcome { user && user.name }!
         </p>
+        <p>Choose from a selection of <Link to='/skills'><strong>skills</strong></Link> to add to your <Link to='/goals'><strong>goals</strong></Link>. 
+            Keep track of your training progress in the goals section. Once you and your pup 
+            have mastered a goal, you can add it to your collection of completed skills. 
+            Check out the skills options to get started!</p>
         {profile !== null ? (
             <Fragment>
                 <DashboardActions />

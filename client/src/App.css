@@ -530,6 +530,14 @@ button {
     display: none;
   }
 
+  .dog-logo {
+    width: 50px;
+    filter: invert(100%);
+    color: white;
+    margin-top: 5px;
+    margin-right: 20px;
+  }
+
   /* Profiles Page */
   .profile {
     grid-template-columns: 1fr;
