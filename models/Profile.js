@@ -57,6 +57,27 @@ const ProfileSchema = new mongoose.Schema({
         }
     }
     ],
+    goalsinprogress: [{
+        goal: {
+            type: String,
+            required: true
+        },
+        progress: [{
+            date: {
+                type: Date,
+                required: true
+            },
+            timePracticed: {
+                type: String,
+                required: true
+            },
+            notes: {
+                type: String,
+                required: true
+            }
+        }
+        ]
+    }],
     education: [
     {
         school: {

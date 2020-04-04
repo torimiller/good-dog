@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
+import GoalsInProgress from './GoalsInProgress';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading }, deleteAccount }) => {
@@ -14,6 +15,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     }, [getCurrentProfile]);
 
     // If the profile is null and it's still loading, we want to show the spinner
+    console.log('Dashboard profile:', profile)
+
     return loading && profile === null ? <Spinner /> : <Fragment>
         <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">
@@ -26,6 +29,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         {profile !== null ? (
             <Fragment>
                 <DashboardActions />
+                <GoalsInProgress goalsinprogress={profile.goalsinprogress} />
                 <Experience experience={profile.experience} />
                 <Education education={profile.education} />
 

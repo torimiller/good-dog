@@ -135,6 +135,39 @@ export const addExperience = (formData, history) => async dispatch => {
     }
 }
 
+// Add Goal In Progress
+export const addGoalInProgress = (formData, history) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/goalinprogress', formData, config);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        dispatch(setAlert('Goal In Progress Added', 'success'));
+
+        history.push('/dashboard');
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if(errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        }); 
+    }
+}
+
 // Add Education
 export const addEducation = (formData, history) => async dispatch => {
     try {
@@ -173,6 +206,26 @@ export const deleteExperience = id => async dispatch => {
     console.log('deleteExperience ran')
     try {
         const res = await axios.delete(`/api/profile/experience/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        })
+
+        dispatch(setAlert('Experience Removed', 'success'));
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        }); 
+    }
+};
+
+// Delete goal in progress
+export const deleteGoalInProgress = id => async dispatch => {
+    console.log('deleteGoalInProgress ran')
+    try {
+        const res = await axios.delete(`/api/profile/goalinprogress/${id}`);
 
         dispatch({
             type: UPDATE_PROFILE,
