@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 //import { addExperience } from '../../actions/profile';
 import { addGoalInProgress } from '../../actions/profile';
 
-const AddGoalInProgress = ({ addExperience, history }) => {
+const AddGoalInProgress = ({ addGoalInProgress, history }) => {
     const [formData, setFormData] = useState({
         goal: '',
-        date: '',
-        timepracticed: '',
-        notes: ''
+        progress: {
+            date: '',
+            timepracticed: '',
+            notes: ''
+        }
     });
 
     const [toDateDisabled, toggleDisabled] = useState(false);
