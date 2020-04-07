@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
-import Education from './Education';
 import GoalsInProgress from './GoalsInProgress';
+import GoalsCompleted from './GoalsCompleted';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading }, deleteAccount }) => {
@@ -29,9 +29,9 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         {profile !== null ? (
             <Fragment>
                 <DashboardActions />
-                <GoalsInProgress goalsinprogress={profile.goalsinprogress} />
-                <Experience experience={profile.experience} />
-                <Education education={profile.education} />
+                {/* <Experience experience={profile.experience} /> */}
+                <GoalsInProgress education={profile.education} />
+                <GoalsCompleted education={profile.education} />
 
                 <divmy-2>
                     <button className="btn btn-dange" onClick={() => deleteAccount()}>

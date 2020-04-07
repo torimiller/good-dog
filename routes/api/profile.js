@@ -230,107 +230,49 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
     }
 });
 
-// @route   PUT api/profile/goalsinprogress
-// @desc    Add goal in progress
-// @access  Private
-router.put('/goalinprogress', [ auth, [
-    check('goal', 'Goal is required').not().isEmpty(),
-    check('progress', 'progress is required').not().isEmpty()
-]], async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-    const {
-        goal,
-        progress: {
-            date,
-            timePracticed,
-            notes
-        }
-    } = req.body;
-
-    const newGoal = {
-        goal,
-        progress: {
-            date,
-            timePracticed,
-            notes
-        }
-    }
-
-    try {
-        const profile = await Profile.findOne({ user: req.user.id });
-
-        // unshift is the same as push except it pushes it to the beginning, not the end
-        profile.goalsinprogress.unshift(newGoal);
-
-        await profile.save();
-
-        res.json(profile);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-// @route   DELETE api/profile/goalinprogress/:goal_id
-// @desc    Delete goal in progress from profile
-// @access  Private
-router.delete('/experience/:exp_id', auth, async (req, res) => {
-    try {
-        // getting the profile of the logged in user
-        const profile = await Profile.findOne({ user: req.user.id });
-
-        // Get remove index
-        const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
-
-        // splicing out the index
-        profile.experience.splice(removeIndex, 1);
-
-        await profile.save();
-
-        res.json(profile);
-        console.log('delete experience ran in routes')
-    } catch (error) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
 
 // @route   PUT api/profile/education
-// @desc    Add profile education
+// @desc    Add goals in progress
 // @access  Private
 router.put('/education', [ auth, [
-    check('school', 'School is required').not().isEmpty(),
-    check('degree', 'Degree is required').not().isEmpty(),
-    check('fieldofstudy', 'Field of study is required').not().isEmpty(),
-    check('from', 'From date is required').not().isEmpty()
+    // check('goal', 'Goal is required').not().isEmpty(),
+    // check('date', 'Date is required').not().isEmpty(),
+    // check('timepracticed', 'Time practiced is required').not().isEmpty(),
+    // check('notes', 'Notes are required').not().isEmpty()
 ]], async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+    // const errors = validationResult(req);
+    // if(!errors.isEmpty) {
+    //     return res.status(400).json({ errors: errors.array() });
+    // }
 
     const {
-        school,
-        degree,
-        fieldofstudy,
-        from,
-        to,
-        current,
-        description
+        // school,
+        // degree,
+        // fieldofstudy,
+        // from,
+        // to,
+        // current,
+        // description,
+        goal,
+        date,
+        timePracticed,
+        notes
     } = req.body;
 
+    console.log('req.body:', req.body)
+
     const newEdu = {
-        school,
-        degree,
-        fieldofstudy,
-        from,
-        to,
-        current,
-        description
+        // school,
+        // degree,
+        // fieldofstudy,
+        // from,
+        // to,
+        // current,
+        // description,
+        goal,
+        date,
+        timePracticed,
+        notes
     }
 
     try {
@@ -349,7 +291,7 @@ router.put('/education', [ auth, [
 });
 
 // @route   DELETE api/profile/education/:edu_id
-// @desc    Delete education from profile
+// @desc    Delete goal in progress from profile
 // @access  Private
 router.delete('/education/:edu_id', auth, async (req, res) => {
     try {
@@ -371,5 +313,102 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+// // @route   DELETE api/profile/goalinprogress/:goal_id
+// // @desc    Delete goal in progress from profile
+// // @access  Private
+// router.delete('/experience/:exp_id', auth, async (req, res) => {
+//     try {
+//         // getting the profile of the logged in user
+//         const profile = await Profile.findOne({ user: req.user.id });
+
+//         // Get remove index
+//         const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
+
+//         // splicing out the index
+//         profile.experience.splice(removeIndex, 1);
+
+//         await profile.save();
+
+//         res.json(profile);
+//         console.log('delete experience ran in routes')
+//     } catch (error) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// // @route   PUT api/profile/education
+// // @desc    Add profile education
+// // @access  Private
+// router.put('/education', [ auth, [
+//     check('school', 'School is required').not().isEmpty(),
+//     check('degree', 'Degree is required').not().isEmpty(),
+//     check('fieldofstudy', 'Field of study is required').not().isEmpty(),
+//     check('from', 'From date is required').not().isEmpty()
+// ]], async (req, res) => {
+//     const errors = validationResult(req);
+//     if(!errors.isEmpty) {
+//         return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     const {
+//         school,
+//         degree,
+//         fieldofstudy,
+//         from,
+//         to,
+//         current,
+//         description
+//     } = req.body;
+
+//     const newEdu = {
+//         school,
+//         degree,
+//         fieldofstudy,
+//         from,
+//         to,
+//         current,
+//         description
+//     }
+
+//     try {
+//         const profile = await Profile.findOne({ user: req.user.id });
+
+//         // unshift is the same as push except it pushes it to the beginning, not the end
+//         profile.education.unshift(newEdu);
+
+//         await profile.save();
+
+//         res.json(profile);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// // @route   DELETE api/profile/education/:edu_id
+// // @desc    Delete education from profile
+// // @access  Private
+// router.delete('/education/:edu_id', auth, async (req, res) => {
+//     try {
+//         // getting the profile of the logged in user
+//         const profile = await Profile.findOne({ user: req.user.id });
+
+//         // Get remove index
+//         const removeIndex = profile.education.map(item => item.id).indexOf(req.params.exp_id);
+
+//         // splicing out the index
+//         profile.education.splice(removeIndex, 1);
+
+//         await profile.save();
+
+//         res.json(profile);
+//         console.log('delete education ran in routes')
+//     } catch (error) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
 
 module.exports = router;
