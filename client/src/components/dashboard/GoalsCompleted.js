@@ -8,9 +8,9 @@ import { deleteEducation } from '../../actions/profile';
 const GoalsCompleted = ({ education, deleteEducation }) => {
     console.log('education:', education)
     const educations = education.map(edu => {
-        console.log('edu:', edu)
+        //console.log('edu:', edu)
         const date = edu.date.toString().split('').slice(0, 9).join('');
-        console.log('date:', date)
+        //console.log('date:', date)
         return (
         <tr key={edu._id}>
             <td>{edu.goal}</td>

@@ -255,7 +255,7 @@ router.put('/education', [ auth, [
         // description,
         goal,
         date,
-        timePracticed,
+        timepracticed,
         notes
     } = req.body;
 
@@ -271,7 +271,7 @@ router.put('/education', [ auth, [
         // description,
         goal,
         date,
-        timePracticed,
+        timepracticed,
         notes
     }
 

@@ -67,7 +67,7 @@ const ProfileSchema = new mongoose.Schema({
                 type: Date,
                 required: true
             },
-            timePracticed: {
+            timepracticed: {
                 type: String,
                 required: true
             },
