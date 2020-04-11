@@ -241,6 +241,26 @@ export const deleteGoalInProgress = id => async dispatch => {
     }
 };
 
+// Edit education
+export const editEducation = id => async dispatch => {
+    console.log('actions deleteEducation ran')
+    try {
+        const res = await axios.put(`/api/profile/education/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        })
+
+        dispatch(setAlert('Education Updated', 'success'));
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        }); 
+    }
+};
+
 // Delete education
 export const deleteEducation = id => async dispatch => {
     console.log('actions deleteEducation ran')

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
-import { deleteEducation } from '../../actions/profile';
+import { deleteEducation, editEducation } from '../../actions/profile';
 
 // education will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
@@ -17,20 +17,19 @@ class GoalsInProgress extends React.Component {
     }
 
     handleEditGoalClick(e) {
-        let goalName = e.target.parentElement.parentElement.firstChild.innerHTML;
-        console.log('clicked goalName:', goalName)
+        // let goalName = e.target.parentElement.parentElement.firstChild.innerHTML;
+        // console.log('clicked goalName:', goalName)
         this.setState({
             editGoal: true,
-            goalName: `${goalName}`,
             goalId: ''
         })
 
     }
 
     render() {
-        var { education, deleteEducation } = this.props;
+        var { education, deleteEducation, editEducation } = this.props;
         const educations = education.map(edu => {
-            //console.log('edu:', edu)
+            console.log('edu:', edu)
             const date = edu.date.toString().split('').slice(0, 9).join('');
             //console.log('date:', date)
             return (
@@ -42,7 +41,20 @@ class GoalsInProgress extends React.Component {
                 <td>{edu.notes}</td>
                 <td>
                 {/* <Link to="/edit-goal"> */}
-                <button className='btn btn-success' onClick={this.handleEditGoalClick, console.log('edit click this:', this)}>Edit</button>
+                <button 
+                    className='btn btn-success' 
+                    onClick={() => {
+                        console.log('edit click this:', this)
+                        //this.handleEditGoalClick();
+                        console.log('editEducation edu._id:', edu._id)
+                        this.setState({
+                            editGoal: true,
+                            goal: `${edu.goal}`,
+                            goalId: `${edu._id}`
+                        })
+                        console.log('this.state:', this.state)
+                        //editEducation(edu._id)
+                    }}>Edit</button>
                 {/* </Link> */}
                     {/* <button onClick={() => {
                         deleteEducation(edu._id)
@@ -51,6 +63,7 @@ class GoalsInProgress extends React.Component {
                 <td>
                     <button onClick={() => {
                         console.log('Education delete onClick ran')
+                        console.log('Education delete edu._id:', edu._id)
                         deleteEducation(edu._id)
                     }} className='btn btn-danger'>Delete</button>
                 </td>
@@ -61,7 +74,7 @@ class GoalsInProgress extends React.Component {
         return (
             <Fragment>
                 <h2 className="my2">Goals In Progress</h2>
-                {this.state.editGoal && <p>CURRENT GOAL BEING EDITED:</p>}
+                
                 {this.state.goalName}
                 <table className="table">
                     <thead>
@@ -73,6 +86,38 @@ class GoalsInProgress extends React.Component {
                             <th />
                         </tr>
                     </thead>
+                    {this.state.editGoal && (
+                    <div>
+                    <h1>Edit {this.state.goal}</h1>
+                    <tr>
+                        <td>{this.state.goal}</td>
+                    </tr>
+                    <form>
+                    <div class="form-group">
+                        <input type="date" placeholder="Date" name="date" />
+                        </div>
+                        <div class="form-group">
+                        <input type="text" placeholder="Time Practiced" name="timepracticed" />
+                        </div>
+                        <div class="form-group">
+                        <textarea
+                            name="notes"
+                            cols="30"
+                            rows="5"
+                            placeholder="Notes"
+                        ></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-primary my-1" />
+                        <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
+                            this.setState({
+                            editGoal: false,
+                            goalId: '',
+                            goal: ''
+                        })
+                        }}>Go Back</Link>
+                    </form>
+                    </div>
+                    )}
                     {!this.state.editGoal && <tbody>{educations}</tbody>}
                     {console.log('educations:', educations)}
                 </table>
@@ -83,10 +128,11 @@ class GoalsInProgress extends React.Component {
 
 GoalsInProgress.propTypes = {
     education: PropTypes.array.isRequired,
-    deleteEducation: PropTypes.func.isRequired
+    deleteEducation: PropTypes.func.isRequired,
+    editEducation: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteEducation })(GoalsInProgress);
+export default connect(null, { deleteEducation, editEducation })(GoalsInProgress);
 
 
 
