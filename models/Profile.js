@@ -57,71 +57,28 @@ const ProfileSchema = new mongoose.Schema({
         }
     }
     ],
-    goalsinprogress: [{
-        goal: {
-            type: String,
-            required: true
-        },
-        progress: [{
-            date: {
-                type: Date,
-                required: true
-            },
-            timepracticed: {
-                type: String,
-                required: true
-            },
-            notes: {
-                type: String,
-                required: true
-            }
-        }
-        ]
-    }],
     education: [
-    {
-        // school: {
-        //     type: String,
-        //     required: true
-        // },
-        // degree: {
-        //     type: String,
-        //     required: true
-        // },
-        // fieldofstudy: {
-        //     type: String,
-        //     required: true
-        // },
-        // from: {
-        //     type: Date,
-        //     required: true
-        // },
-        // to: {
-        //     type: Date
-        // },
-        // current: {
-        //     type: Boolean,
-        //     default: false
-        // },
-        // description: {
-        //     type: String
-        // },
+        {
         goal: {
             type: String,
             //required: true
         },
-        date: {
-            type: Date,
-            //required: true
-        },
-        timepracticed: {
-            type: String,
-            //required: true
-        },
-        notes: {
-            type: String,
-            //required: true
-        }
+        progress: [
+            {
+                date: {
+                    type: Date,
+                    //required: true
+                },
+                timepracticed: {
+                    type: String,
+                    //required: true
+                },
+                notes: {
+                    type: String,
+                    //required: true
+                }
+            }
+        ], 
     }
     ],
     social: {

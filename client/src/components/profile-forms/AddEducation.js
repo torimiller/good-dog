@@ -14,18 +14,57 @@ const AddEducation = ({ addEducation, history }) => {
         // current: false,
         // description: '',
         goal: '',
-        date: '',
-        timepracticed: '',
-        notes: ''
+        progress: {
+            date: '',
+            timepracticed: '',
+            notes: ''
+        }
     });
 
     const [toDateDisabled, toggleDisabled] = useState(false);
 
-    const { goal, date, timepracticed, notes } = formData;
+    const { goal, progress: { date, timepracticed, notes } } = formData;
+
+    console.log('formData:', formData)
 
     console.log('AddEducation date:', date);
 
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = e => {
+        console.log('onChange e.target:', e.target);
+        console.log('onChange e.target.name:', e.target.name);
+        console.log('onChange e.target.value:', e.target.value);
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    const onDateChange = e => {
+        setFormData({
+            ...formData, 
+            progress: {
+                ...formData.progress,
+                date: e.target.value
+            }
+        })
+    }
+
+    const onTimeChange = e => {
+        setFormData({
+            ...formData, 
+            progress: {
+                ...formData.progress,
+                timepracticed: e.target.value
+            }
+        })
+    }
+
+    const onNotesChange = e => {
+        setFormData({
+            ...formData, 
+            progress: {
+                ...formData.progress,
+                notes: e.target.value
+            }
+        })
+    }
 
     return (
         <Fragment>
@@ -38,12 +77,14 @@ const AddEducation = ({ addEducation, history }) => {
             
             <form class="form" onSubmit={e => {
                     e.preventDefault();
+                    //setFormData({...formData, progress: date, timepracticed, notes})
                     console.log('AddEducation formData:', formData)
                     console.log('AddEducation history:', history)
                     addEducation(formData, history);
                 }}>
                 <div className="form-group">
                 <select name="goal" value={goal} onChange={e => onChange(e)}>
+                    {console.log('goal:', goal)}
                     <option value="0">Choose from a list of skills</option>
                     <option value="Sit">Sit</option>
                     <option value="Stay">Stay</option>
@@ -105,10 +146,11 @@ const AddEducation = ({ addEducation, history }) => {
                     </div>
                 )} */}
                 <div class="form-group">
-                <input type="date" placeholder="Date" name="date" value={date} onChange={e => onChange(e)} />
+                <input type="date" placeholder="Date" name="date" value={date} onChange={e => onDateChange(e)} />
+                {console.log('date:', date)}
                 </div>
                 <div class="form-group">
-                <input type="text" placeholder="Time Practiced" name="timepracticed" value={timepracticed} onChange={e => onChange(e)} />
+                <input type="text" placeholder="Time Practiced" name="timepracticed" value={timepracticed} onChange={e => onTimeChange(e)} />
                 </div>
                 <div class="form-group">
                 <textarea
@@ -116,7 +158,7 @@ const AddEducation = ({ addEducation, history }) => {
                     cols="30"
                     rows="5"
                     placeholder="Notes"
-                    value={notes} onChange={e => onChange(e)}
+                    value={notes} onChange={e => onNotesChange(e)}
                 ></textarea>
                 </div>
                 <input type="submit" class="btn btn-primary my-1" />

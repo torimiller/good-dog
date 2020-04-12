@@ -240,23 +240,16 @@ router.put('/education', [ auth, [
     // check('timepracticed', 'Time practiced is required').not().isEmpty(),
     // check('notes', 'Notes are required').not().isEmpty()
 ]], async (req, res) => {
+    console.log('.put education req.body:', req.body)
+    console.log('.put education res.body:', res.body)
     // const errors = validationResult(req);
     // if(!errors.isEmpty) {
     //     return res.status(400).json({ errors: errors.array() });
     // }
 
     const {
-        // school,
-        // degree,
-        // fieldofstudy,
-        // from,
-        // to,
-        // current,
-        // description,
         goal,
-        date,
-        timepracticed,
-        notes
+        progress
     } = req.body;
 
     console.log('req.body:', req.body)
@@ -270,10 +263,10 @@ router.put('/education', [ auth, [
         // current,
         // description,
         goal,
-        date,
-        timepracticed,
-        notes
+        progress
     }
+
+    console.log('newEdu:', newEdu);
 
     try {
         const profile = await Profile.findOne({ user: req.user.id });
@@ -290,6 +283,46 @@ router.put('/education', [ auth, [
     }
 });
 
+// @route   UPDATE api/profile/education/:edu_id
+// @desc    Update progress
+// @access  Private
+router.put('/education/:edu_id', auth, async (req, res) => {
+    const {
+        date,
+        timepracticed,
+        notes
+    } = req.body;
+
+    const newProgress = {
+        date,
+        timepracticed,
+        notes
+    }
+
+    console.log('newProgress:', newProgress)
+
+    try {
+        // getting the profile of the logged in user
+        const profile = await Profile.findOne({ user: req.user.id });
+        
+        const updateIndex = profile.education.map(item => item.id).indexOf(req.params.edu_id);
+
+        // the goal to be updated:
+        console.log('profile.education[updateIndex]:', profile.education[updateIndex])
+
+        profile.education[updateIndex].progress.push(newProgress)
+
+
+        await profile.save();
+
+        res.json(profile);
+        console.log('update education ran in routes')
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 // @route   DELETE api/profile/education/:edu_id
 // @desc    Delete goal in progress from profile
 // @access  Private
@@ -299,6 +332,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
         const profile = await Profile.findOne({ user: req.user.id });
 
         // Get remove index
+        console.log('education delete req.params:', req.params)
         const removeIndex = profile.education.map(item => item.id).indexOf(req.params.exp_id);
 
         // splicing out the index

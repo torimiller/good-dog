@@ -20,6 +20,7 @@ export const getCurrentProfile = () => async dispatch => {
             payload: res.data
         });
     } catch (err) {
+        console.log('getCurrentProfile err:', err);
         dispatch({
             type: PROFILE_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }
@@ -155,6 +156,7 @@ export const addGoalInProgress = (formData, history) => async dispatch => {
 
         history.push('/dashboard');
     } catch (err) {
+        console.log('err.response:', err.response)
         const errors = err.response.data.errors;
 
         if(errors) {
@@ -170,7 +172,9 @@ export const addGoalInProgress = (formData, history) => async dispatch => {
 
 // Add Education
 export const addEducation = (formData, history) => async dispatch => {
+    console.log('addEducation action formData:', formData)
     try {
+        console.log('addEducation try block ran');
         const config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -178,6 +182,8 @@ export const addEducation = (formData, history) => async dispatch => {
         }
 
         const res = await axios.put('/api/profile/education', formData, config);
+        console.log('addEducation res:', res)
+        console.log('console log after addEducation res')
 
         dispatch({
             type: UPDATE_PROFILE,
@@ -188,6 +194,7 @@ export const addEducation = (formData, history) => async dispatch => {
 
         history.push('/dashboard');
     } catch (err) {
+        console.log('err.response:', err.response)
         const errors = err.response.data.errors;
 
         if(errors) {
@@ -241,11 +248,15 @@ export const deleteGoalInProgress = id => async dispatch => {
     }
 };
 
-// Edit education
-export const editEducation = id => async dispatch => {
-    console.log('actions deleteEducation ran')
+// Update education
+export const updateEducation = (id, progress) => async dispatch => {
+    console.log('actions updateEducation ran')
+    console.log('updateEducation id:', id)
+    console.log('updateEducation progress:', progress)
     try {
-        const res = await axios.put(`/api/profile/education/${id}`);
+        console.log('updateEducation try catch ran')
+        const res = await axios.put(`/api/profile/education/${id}`, progress);
+        console.log('updateEducation res.data:', res.data)
 
         dispatch({
             type: UPDATE_PROFILE,
@@ -260,6 +271,7 @@ export const editEducation = id => async dispatch => {
         }); 
     }
 };
+
 
 // Delete education
 export const deleteEducation = id => async dispatch => {

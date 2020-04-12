@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
-import { deleteEducation, editEducation } from '../../actions/profile';
+import { deleteEducation, updateEducation } from '../../actions/profile';
 
 // education will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
@@ -11,9 +11,16 @@ class GoalsInProgress extends React.Component {
         super(props);
         this.state = {
             editGoal: false,
-            goalName: ''
+            goalName: '',
+            goalId: '',
+            date: '',
+            timepracticed: '',
+            notes: ''
         }
         this.handleEditGoalClick = this.handleEditGoalClick.bind(this);
+        this.handleDate = this.handleDate.bind(this);
+        this.handleTimePracticed = this.handleTimePracticed.bind(this);
+        this.handleNotes = this.handleNotes.bind(this);
     }
 
     handleEditGoalClick(e) {
@@ -26,39 +33,77 @@ class GoalsInProgress extends React.Component {
 
     }
 
+    handleDate(e) {
+        this.setState({
+            date: e.target.value
+        })
+    }
+
+    handleTimePracticed(e) {
+        this.setState({
+            timepracticed: e.target.value
+        })
+    }
+
+    handleNotes(e) {
+        this.setState({
+            notes: e.target.value
+        })
+    }
+
     render() {
-        var { education, deleteEducation, editEducation } = this.props;
+        var { education, deleteEducation, updateEducation } = this.props;
+        let currentGoalId;
         const educations = education.map(edu => {
             console.log('edu:', edu)
-            const date = edu.date.toString().split('').slice(0, 9).join('');
+            console.log('edu.progress:', edu.progress)
+            console.log('edu.progress.length:', edu.progress.length)
+            // let date;
+            // for (var i=0; i < edu.progress.length; i++) {
+            //     date = edu.progress[i].date.toString().split('').slice(0, 9).join('');
+            //     console.log('date:', date) 
+            // }
+
+            let date;
+            let timepracticed;
+            let notes;
+
+            edu.progress.map(progress => {
+                console.log('mapped progress:', progress)
+                date = progress.date.toString().split('').slice(0, 9).join('');
+                timepracticed = progress.timepracticed;
+                notes = progress.notes;
+            })
+
+            console.log('timepracticed:', timepracticed)
+            //const date = edu.date.toString().split('').slice(0, 9).join('');
             //console.log('date:', date)
             return (
             <tr key={edu._id}>
                 <td>{edu.goal}</td>
-                {/* <td className="hide-sm">{edu.degree}</td> */}
                 <td>{date}</td>
+                <td>{timepracticed}</td>
+                <td>{notes}</td>
+                {/* <td className="hide-sm">{edu.degree}</td> */}
+                {/* <td>{date}</td>
                 <td>{edu.timepracticed}</td>
-                <td>{edu.notes}</td>
+                <td>{edu.notes}</td> */}
                 <td>
                 {/* <Link to="/edit-goal"> */}
                 <button 
                     className='btn btn-success' 
                     onClick={() => {
-                        console.log('edit click this:', this)
                         //this.handleEditGoalClick();
-                        console.log('editEducation edu._id:', edu._id)
+                        console.log('Edit button edu._id:', edu._id)
+                        currentGoalId = edu._id;
                         this.setState({
                             editGoal: true,
                             goal: `${edu.goal}`,
                             goalId: `${edu._id}`
                         })
                         console.log('this.state:', this.state)
-                        //editEducation(edu._id)
                     }}>Edit</button>
                 {/* </Link> */}
-                    {/* <button onClick={() => {
-                        deleteEducation(edu._id)
-                    }} className='btn btn-success'>Edit</button> */}
                 </td>
                 <td>
                     <button onClick={() => {
@@ -86,38 +131,55 @@ class GoalsInProgress extends React.Component {
                             <th />
                         </tr>
                     </thead>
+
+                    {/* Editing current goal */}
                     {this.state.editGoal && (
                     <div>
-                    <h1>Edit {this.state.goal}</h1>
+                    <h1>Add New Entry for {this.state.goal}</h1>
                     <tr>
                         <td>{this.state.goal}</td>
                     </tr>
-                    <form>
-                    <div class="form-group">
-                        <input type="date" placeholder="Date" name="date" />
+                    <form class="form" onSubmit={e => {
+                    e.preventDefault();
+                    //setFormData({...formData, progress: date, timepracticed, notes})
+                    console.log('updateEducation id:', this.state.goalId);
+                    let id = this.state.goalId;
+                    let progress = {date: this.state.date, timepracticed: this.state.timepracticed, notes: this.state.notes}
+                    console.log('updateEducation progress:', progress);
+                    updateEducation(id, progress)
+                    this.setState({
+                        editGoal: false,
+                        goalId: ''
+                    })
+                    }}>
+        
+                        <div class="form-group">
+                            <input type="date" placeholder="Date" name="date" value={this.state.date} onChange={this.handleDate} />
                         </div>
                         <div class="form-group">
-                        <input type="text" placeholder="Time Practiced" name="timepracticed" />
+                            <input type="text" placeholder="Time Practiced" name="timepracticed" value={this.state.timepracticed} onChange={this.handleTimePracticed} />
                         </div>
                         <div class="form-group">
-                        <textarea
-                            name="notes"
-                            cols="30"
-                            rows="5"
-                            placeholder="Notes"
-                        ></textarea>
+                            <textarea
+                                name="notes"
+                                cols="30"
+                                rows="5"
+                                placeholder="Notes"
+                                value={this.state.notes} onChange={this.handleNotes}
+                            ></textarea>
                         </div>
                         <input type="submit" class="btn btn-primary my-1" />
                         <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
                             this.setState({
                             editGoal: false,
-                            goalId: '',
-                            goal: ''
+                            goal: '',
+                            goalId: ''
                         })
                         }}>Go Back</Link>
                     </form>
                     </div>
                     )}
+
                     {!this.state.editGoal && <tbody>{educations}</tbody>}
                     {console.log('educations:', educations)}
                 </table>
@@ -129,10 +191,10 @@ class GoalsInProgress extends React.Component {
 GoalsInProgress.propTypes = {
     education: PropTypes.array.isRequired,
     deleteEducation: PropTypes.func.isRequired,
-    editEducation: PropTypes.func.isRequired
+    updateEducation: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteEducation, editEducation })(GoalsInProgress);
+export default connect(null, { deleteEducation, updateEducation })(GoalsInProgress);
 
 
 

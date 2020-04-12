@@ -9,15 +9,15 @@ const GoalsCompleted = ({ education, deleteEducation }) => {
     console.log('education:', education)
     const educations = education.map(edu => {
         //console.log('edu:', edu)
-        const date = edu.date.toString().split('').slice(0, 9).join('');
+        // const date = edu.date.toString().split('').slice(0, 9).join('');
         //console.log('date:', date)
         return (
         <tr key={edu._id}>
             <td>{edu.goal}</td>
             {/* <td className="hide-sm">{edu.degree}</td> */}
-            <td>{date}</td>
+            {/* <td>{date}</td>
             <td>{edu.timepracticed}</td>
-            <td>{edu.notes}</td>
+            <td>{edu.notes}</td> */}
             <td>
                 <button onClick={() => {
                     console.log('Education delete onClick ran')
@@ -40,7 +40,7 @@ const GoalsCompleted = ({ education, deleteEducation }) => {
                         <th />
                     </tr>
                 </thead>
-                <tbody>{educations}</tbody>
+                {/* <tbody>{educations}</tbody> */}
             </table>
         </Fragment>
     )
