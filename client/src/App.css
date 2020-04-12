@@ -587,3 +587,9 @@ button {
     padding: 0.3rem 0.4rem;
   }
 }
+
+/* Goals style */
+
+.goal-progress {
+  margin: 10px;
+}

@@ -60,7 +60,8 @@ class GoalsInProgress extends React.Component {
 
             edu.progress.map(progress => {
                 //console.log('mapped progress:', progress)
-                date = progress.date.toString().split('').slice(0, 9).join('');
+                //console.log('progress.date.toString().split(','):', progress.date.toString().split(''))
+                date = progress.date.toString().split('').slice(0, 10).join('');
                 timepracticed = progress.timepracticed;
                 notes = progress.notes;
             })
@@ -99,7 +100,7 @@ class GoalsInProgress extends React.Component {
 
                         edu.progress.map(progress => {
                             console.log('mapped progress within onClick:', progress)
-                            date = progress.date.toString().split('').slice(0, 9).join('');
+                            date = progress.date.toString().split('').slice(0, 10).join('');
                             timepracticed = progress.timepracticed;
                             notes = progress.notes;
                             let currentProgress = {date: date, timepracticed: timepracticed, notes: notes}
@@ -196,20 +197,23 @@ class GoalsInProgress extends React.Component {
                     {this.state.viewProgress && (
                         
                         <div>
+                            
+                            {console.log('this.state.goalId:', this.state.goalId)}
+                            <h1>View Progress for {this.state.goal}</h1>
+                            <tr>
+                                <td>{this.state.goal}</td>
+                            </tr>
+
                             {this.state.clickedProgress.map(progress => {
                                 return (
-                                    <div>
+                                    <div className="goal-progress">
                                         <p>Date: {progress.date}</p>
                                         <p>Time Practiced: {progress.timepracticed}</p>
                                         <p>Notes: {progress.notes}</p>
                                     </div>
                                 )
                             })}
-                            {console.log('this.state.goalId:', this.state.goalId)}
-                            <h1>View Progress for {this.state.goal}</h1>
-                            <tr>
-                                <td>{this.state.goal}</td>
-                            </tr>
+
                             <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
                                 this.setState({
                                     editGoal: false,
