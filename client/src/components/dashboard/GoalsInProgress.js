@@ -11,6 +11,8 @@ class GoalsInProgress extends React.Component {
         super(props);
         this.state = {
             editGoal: false,
+            viewProgress: false,
+            clickedProgress: [],
             goalName: '',
             goalId: '',
             date: '',
@@ -24,13 +26,10 @@ class GoalsInProgress extends React.Component {
     }
 
     handleEditGoalClick(e) {
-        // let goalName = e.target.parentElement.parentElement.firstChild.innerHTML;
-        // console.log('clicked goalName:', goalName)
         this.setState({
             editGoal: true,
             goalId: ''
         })
-
     }
 
     handleDate(e) {
@@ -55,45 +54,33 @@ class GoalsInProgress extends React.Component {
         var { education, deleteEducation, updateEducation } = this.props;
         let currentGoalId;
         const educations = education.map(edu => {
-            console.log('edu:', edu)
-            console.log('edu.progress:', edu.progress)
-            console.log('edu.progress.length:', edu.progress.length)
-            // let date;
-            // for (var i=0; i < edu.progress.length; i++) {
-            //     date = edu.progress[i].date.toString().split('').slice(0, 9).join('');
-            //     console.log('date:', date) 
-            // }
-
             let date;
             let timepracticed;
             let notes;
 
             edu.progress.map(progress => {
-                console.log('mapped progress:', progress)
+                //console.log('mapped progress:', progress)
                 date = progress.date.toString().split('').slice(0, 9).join('');
                 timepracticed = progress.timepracticed;
                 notes = progress.notes;
             })
 
-            console.log('timepracticed:', timepracticed)
             //const date = edu.date.toString().split('').slice(0, 9).join('');
             //console.log('date:', date)
             return (
             <tr key={edu._id}>
                 <td>{edu.goal}</td>
-                <td>{date}</td>
+                {/* <td>{date}</td>
                 <td>{timepracticed}</td>
-                <td>{notes}</td>
+                <td>{notes}</td> */}
                 {/* <td className="hide-sm">{edu.degree}</td> */}
                 {/* <td>{date}</td>
                 <td>{edu.timepracticed}</td>
                 <td>{edu.notes}</td> */}
                 <td>
-                {/* <Link to="/edit-goal"> */}
                 <button 
-                    className='btn btn-success' 
+                    className='btn btn-success btn-goals' 
                     onClick={() => {
-                        //this.handleEditGoalClick();
                         console.log('Edit button edu._id:', edu._id)
                         currentGoalId = edu._id;
                         this.setState({
@@ -102,20 +89,48 @@ class GoalsInProgress extends React.Component {
                             goalId: `${edu._id}`
                         })
                         console.log('this.state:', this.state)
-                    }}>Edit</button>
-                {/* </Link> */}
+                    }}>Add Progress</button>
+                </td>
+                <td>
+                <button 
+                    className='btn btn-success btn-goals' 
+                    onClick={() => {
+                        console.log('View Progress edu:', edu)
+
+                        edu.progress.map(progress => {
+                            console.log('mapped progress within onClick:', progress)
+                            date = progress.date.toString().split('').slice(0, 9).join('');
+                            timepracticed = progress.timepracticed;
+                            notes = progress.notes;
+                            let currentProgress = {date: date, timepracticed: timepracticed, notes: notes}
+                            console.log('progress inside map function:', progress)
+                            this.state.clickedProgress.push(currentProgress);
+                        })
+
+                        console.log('this.state.clickedProgress', this.state.clickedProgress)
+
+                        this.setState({
+                            viewProgress: true,
+                            goal: `${edu.goal}`,
+                            goalId: `${edu._id}`
+                        })
+                    }}>View Progress</button>
+                </td>
+                <td>
+                <button 
+                    className='btn btn-success btn-goals' 
+                    onClick={() => {
+                        console.log('Add to Completed clicked')
+                    }}>Completed</button>
                 </td>
                 <td>
                     <button onClick={() => {
-                        console.log('Education delete onClick ran')
-                        console.log('Education delete edu._id:', edu._id)
                         deleteEducation(edu._id)
-                    }} className='btn btn-danger'>Delete</button>
+                    }} className='btn btn-danger btn-goals'>Delete</button>
                 </td>
             </tr>
         )});
     
-        console.log('GoalsInProgress this.state:', this.state)
         return (
             <Fragment>
                 <h2 className="my2">Goals In Progress</h2>
@@ -125,9 +140,9 @@ class GoalsInProgress extends React.Component {
                     <thead>
                         <tr>
                             <th>Goal</th>
-                            <th className="hide-sm">Date</th>
-                            <th className="hide-sm">Time Practiced</th>
-                            <th className="hide-sm">Notes</th>
+                            <th className="hide-sm"></th>
+                            <th className="hide-sm"></th>
+                            <th className="hide-sm"></th>
                             <th />
                         </tr>
                     </thead>
@@ -139,13 +154,11 @@ class GoalsInProgress extends React.Component {
                     <tr>
                         <td>{this.state.goal}</td>
                     </tr>
+
                     <form class="form" onSubmit={e => {
                     e.preventDefault();
-                    //setFormData({...formData, progress: date, timepracticed, notes})
-                    console.log('updateEducation id:', this.state.goalId);
                     let id = this.state.goalId;
                     let progress = {date: this.state.date, timepracticed: this.state.timepracticed, notes: this.state.notes}
-                    console.log('updateEducation progress:', progress);
                     updateEducation(id, progress)
                     this.setState({
                         editGoal: false,
@@ -180,7 +193,36 @@ class GoalsInProgress extends React.Component {
                     </div>
                     )}
 
-                    {!this.state.editGoal && <tbody>{educations}</tbody>}
+                    {this.state.viewProgress && (
+                        
+                        <div>
+                            {this.state.clickedProgress.map(progress => {
+                                return (
+                                    <div>
+                                        <p>Date: {progress.date}</p>
+                                        <p>Time Practiced: {progress.timepracticed}</p>
+                                        <p>Notes: {progress.notes}</p>
+                                    </div>
+                                )
+                            })}
+                            {console.log('this.state.goalId:', this.state.goalId)}
+                            <h1>View Progress for {this.state.goal}</h1>
+                            <tr>
+                                <td>{this.state.goal}</td>
+                            </tr>
+                            <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
+                                this.setState({
+                                    editGoal: false,
+                                    viewProgress: false,
+                                    clickedProgress: [],
+                                    goal: '',
+                                    goalId: ''
+                                })
+                            }}>Go Back</Link>
+                        </div>
+                    )}
+
+                    {!this.state.editGoal && !this.state.viewProgress && <tbody>{educations}</tbody>}
                     {console.log('educations:', educations)}
                 </table>
             </Fragment>
@@ -195,70 +237,3 @@ GoalsInProgress.propTypes = {
 }
 
 export default connect(null, { deleteEducation, updateEducation })(GoalsInProgress);
-
-
-
-// import React, { Fragment } from 'react'
-// import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import Moment from 'react-moment';
-// import PropTypes from 'prop-types'
-// import { deleteEducation } from '../../actions/profile';
-
-// // education will be passed in from the parent component which is Dashboard.js
-// const GoalsInProgress = ({ education, deleteEducation }) => {
-//     console.log('education:', education)
-//     const educations = education.map(edu => {
-//         console.log('edu:', edu)
-//         const date = edu.date.toString().split('').slice(0, 9).join('');
-//         console.log('date:', date)
-//         return (
-//         <tr key={edu._id}>
-//             <td>{edu.goal}</td>
-//             {/* <td className="hide-sm">{edu.degree}</td> */}
-//             <td>{date}</td>
-//             <td>{edu.timepracticed}</td>
-//             <td>{edu.notes}</td>
-//             <td>
-//             {/* <Link to="/edit-goal"> */}
-//             <button className='btn btn-success'>Edit</button>
-//             {/* </Link> */}
-//                 {/* <button onClick={() => {
-//                     deleteEducation(edu._id)
-//                 }} className='btn btn-success'>Edit</button> */}
-//             </td>
-//             <td>
-//                 <button onClick={() => {
-//                     console.log('Education delete onClick ran')
-//                     deleteEducation(edu._id)
-//                 }} className='btn btn-danger'>Delete</button>
-//             </td>
-//         </tr>
-//     )});
-
-//     return (
-//         <Fragment>
-//             <h2 className="my2">Goals In Progress</h2>
-//             <table className="table">
-//                 <thead>
-//                     <tr>
-//                         <th>Goal</th>
-//                         <th className="hide-sm">Date</th>
-//                         <th className="hide-sm">Time Practiced</th>
-//                         <th className="hide-sm">Notes</th>
-//                         <th />
-//                     </tr>
-//                 </thead>
-//                 <tbody>{educations}</tbody>
-//                 {console.log('educations:', educations)}
-//             </table>
-//         </Fragment>
-//     )
-// }
-
-// GoalsInProgress.propTypes = {
-//     education: PropTypes.array.isRequired,
-//     deleteEducation: PropTypes.func.isRequired
-// }
-
-// export default connect(null, { deleteEducation })(GoalsInProgress);
