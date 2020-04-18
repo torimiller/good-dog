@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
-import { deleteEducation, updateEducation } from '../../actions/profile';
+import { deleteEducation, updateEducation, addCompletedGoal } from '../../actions/profile';
 
 // education will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
@@ -23,6 +23,9 @@ class GoalsInProgress extends React.Component {
         this.handleDate = this.handleDate.bind(this);
         this.handleTimePracticed = this.handleTimePracticed.bind(this);
         this.handleNotes = this.handleNotes.bind(this);
+
+        console.log('GoalsInProgress props:', props)
+
     }
 
     handleEditGoalClick(e) {
@@ -51,7 +54,9 @@ class GoalsInProgress extends React.Component {
     }
 
     render() {
-        var { education, deleteEducation, updateEducation } = this.props;
+        
+
+        var { education, deleteEducation, updateEducation, addCompletedGoal } = this.props;
         let currentGoalId;
         const educations = education.map(edu => {
             let date;
@@ -99,7 +104,6 @@ class GoalsInProgress extends React.Component {
                         console.log('View Progress edu:', edu)
 
                         edu.progress.map(progress => {
-                            console.log('mapped progress within onClick:', progress)
                             date = progress.date.toString().split('').slice(0, 10).join('');
                             timepracticed = progress.timepracticed;
                             notes = progress.notes;
@@ -121,7 +125,13 @@ class GoalsInProgress extends React.Component {
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        console.log('Add to Completed clicked')
+                        console.log('Add to Completed edu:', edu)
+                        console.log('Add to Completed edu._id:', edu._id)
+                        addCompletedGoal(edu, edu._id);
+                        // capture the current goal
+                        // make a copy
+                        // add to Completed Goals
+                        // delete the original
                     }}>Completed</button>
                 </td>
                 <td>
@@ -131,10 +141,12 @@ class GoalsInProgress extends React.Component {
                 </td>
             </tr>
         )});
-    
+
         return (
             <Fragment>
-                <h2 className="my2">Goals In Progress</h2>
+                <h2 className="my2 goals-h2" onClick={() => {
+                        console.log('h2 this.state:', this.state);
+                    }}>Goals In Progress</h2>
                 
                 {this.state.goalName}
                 <table className="table">
@@ -194,6 +206,7 @@ class GoalsInProgress extends React.Component {
                     </div>
                     )}
 
+                    {/* View current goal progress */}
                     {this.state.viewProgress && (
                         
                         <div>
@@ -237,7 +250,8 @@ class GoalsInProgress extends React.Component {
 GoalsInProgress.propTypes = {
     education: PropTypes.array.isRequired,
     deleteEducation: PropTypes.func.isRequired,
-    updateEducation: PropTypes.func.isRequired
+    updateEducation: PropTypes.func.isRequired,
+    addCompletedGoal: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteEducation, updateEducation })(GoalsInProgress);
+export default connect(null, { deleteEducation, updateEducation, addCompletedGoal })(GoalsInProgress);

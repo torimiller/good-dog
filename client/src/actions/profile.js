@@ -293,6 +293,58 @@ export const deleteEducation = id => async dispatch => {
     }
 };
 
+// Add to Completed Goals
+export const addCompletedGoal = (goal, id) => async dispatch => {
+    console.log('addCompletedGoal action goal:', goal)
+    try {
+        console.log('addCompletedGoal try block ran');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/completedgoals', goal, config);
+        console.log('addCompletedGoal res:', res)
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        try {
+            const res = await axios.delete(`/api/profile/education/${id}`);
+    
+            dispatch({
+                type: UPDATE_PROFILE,
+                payload: res.data
+            })
+    
+            dispatch(setAlert('Education Removed', 'success'));
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status }
+            }); 
+        }
+
+        dispatch(setAlert('Completed Goal Added', 'success'));
+    } catch (err) {
+        console.log('err:', err)
+        console.log('err.response:', err.response)
+        const errors = err.response.data.errors;
+
+        if(errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        }); 
+    }
+}
+
 // Delete account & profile
 export const deleteAccount = () => async dispatch => {
     if(window.confirm('Are you sure? This can NOT be undone!')) {

@@ -348,6 +348,49 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     }
 });
 
+// @route   PUT api/profile/completedgoals
+// @desc    Add completed goal
+// @access  Private
+router.put('/completedgoals', [ auth, [
+    // check('goal', 'Goal is required').not().isEmpty(),
+    // check('date', 'Date is required').not().isEmpty(),
+    // check('timepracticed', 'Time practiced is required').not().isEmpty(),
+    // check('notes', 'Notes are required').not().isEmpty()
+]], async (req, res) => {
+    // const errors = validationResult(req);
+    // if(!errors.isEmpty) {
+    //     return res.status(400).json({ errors: errors.array() });
+    // }
+
+    const {
+        goal,
+        progress
+    } = req.body;
+
+    console.log('req.body:', req.body)
+
+    const newGoal = {
+        goal,
+        progress
+    }
+
+    console.log('newGoal:', newGoal);
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // unshift is the same as push except it pushes it to the beginning, not the end
+        profile.completedgoals.unshift(newGoal);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 // // @route   DELETE api/profile/goalinprogress/:goal_id
 // // @desc    Delete goal in progress from profile
 // // @access  Private

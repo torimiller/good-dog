@@ -81,6 +81,30 @@ const ProfileSchema = new mongoose.Schema({
         ], 
     }
     ],
+    completedgoals: [
+        {
+        goal: {
+            type: String,
+            //required: true
+        },
+        progress: [
+            {
+                date: {
+                    type: Date,
+                    //required: true
+                },
+                timepracticed: {
+                    type: String,
+                    //required: true
+                },
+                notes: {
+                    type: String,
+                    //required: true
+                }
+            }
+        ], 
+    }
+    ],
     social: {
         youtube: {
             type: String

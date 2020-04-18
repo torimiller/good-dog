@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,13 +9,15 @@ import GoalsInProgress from './GoalsInProgress';
 import GoalsCompleted from './GoalsCompleted';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
-const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading }, deleteAccount }) => {
+const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading }, deleteAccount }, props) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
+    //console.log('Dashboard props:', props)
+
 
     // If the profile is null and it's still loading, we want to show the spinner
-    console.log('Dashboard profile:', profile)
+    //console.log('Dashboard profile:', profile)
 
     return loading && profile === null ? <Spinner /> : <Fragment>
         <h1 className="large text-primary">Dashboard</h1>
@@ -29,10 +31,10 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         {profile !== null ? (
             <Fragment>
                 <DashboardActions />
+                {console.log('Dashboard profile:', profile)}
                 {/* <Experience experience={profile.experience} /> */}
                 <GoalsInProgress education={profile.education} />
-                {/* <GoalsCompleted education={profile.education} /> */}
-
+                <GoalsCompleted education={profile.education} completedGoals={profile.completedgoals} />
                 <divmy-2>
                     <button className="btn btn-dange" onClick={() => deleteAccount()}>
                         <i className="fas fa-user-minus"></i> Delete My Account
