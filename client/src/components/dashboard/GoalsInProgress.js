@@ -12,6 +12,7 @@ class GoalsInProgress extends React.Component {
         this.state = {
             editGoal: false,
             viewProgress: false,
+            goalsInProgressExist: false,
             clickedProgress: [],
             goalName: '',
             goalId: '',
@@ -53,9 +54,9 @@ class GoalsInProgress extends React.Component {
         })
     }
 
-    render() {
-        
+    
 
+    render() {
         var { education, deleteEducation, updateEducation, addCompletedGoal } = this.props;
         let currentGoalId;
         const educations = education.map(edu => {
@@ -64,15 +65,11 @@ class GoalsInProgress extends React.Component {
             let notes;
 
             edu.progress.map(progress => {
-                //console.log('mapped progress:', progress)
-                //console.log('progress.date.toString().split(','):', progress.date.toString().split(''))
                 date = progress.date.toString().split('').slice(0, 10).join('');
                 timepracticed = progress.timepracticed;
                 notes = progress.notes;
             })
 
-            //const date = edu.date.toString().split('').slice(0, 9).join('');
-            //console.log('date:', date)
             return (
             <tr key={edu._id}>
                 <td>{edu.goal}</td>
@@ -125,14 +122,9 @@ class GoalsInProgress extends React.Component {
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        console.log('Add to Completed edu:', edu)
-                        console.log('Add to Completed edu._id:', edu._id)
                         addCompletedGoal(edu, edu._id);
-                        // capture the current goal
-                        // make a copy
-                        // add to Completed Goals
-                        // delete the original
-                    }}>Completed</button>
+                    }}>Completed
+                </button>
                 </td>
                 <td>
                     <button onClick={() => {
@@ -144,21 +136,29 @@ class GoalsInProgress extends React.Component {
 
         return (
             <Fragment>
-                <h2 className="my2 goals-h2" onClick={() => {
-                        console.log('h2 this.state:', this.state);
-                    }}>Goals In Progress</h2>
-                
+                <h2 className="my2 goals-h2">Goals In Progress</h2>
+
                 {this.state.goalName}
+
                 <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Goal</th>
-                            <th className="hide-sm"></th>
-                            <th className="hide-sm"></th>
-                            <th className="hide-sm"></th>
-                            <th />
-                        </tr>
-                    </thead>
+                    {console.log('GoalsInProgress this.props.education:', this.props.education)}
+                    {/* {this.props.education === 0 ( */}
+                        <thead>
+                            <tr>
+                                <th>Goal</th>
+                                <th className="hide-sm"></th>
+                                <th className="hide-sm"></th>
+                                <th className="hide-sm"></th>
+                                <th />
+                            </tr>
+                        </thead>
+                    {/* )
+                    } */}
+
+                    {/* {this.props.education !== 0 (
+                        <p>You don't have any goals in progress.</p>
+                    )} */}
+                    
 
                     {/* Editing current goal */}
                     {this.state.editGoal && (

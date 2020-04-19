@@ -23,6 +23,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         <h1 className="large text-primary header-h1">Dashboard</h1>
         <p className="lead">
             <i className="fas fa-user"></i> Welcome { user && user.name }!
+            {console.log('Dashboard user:', user)}
+            {console.log('Dashboard profile:', profile)}
         </p>
         {profile !== null ? (
             <Fragment>
@@ -34,8 +36,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 {/* <Experience experience={profile.experience} /> */}
                 <GoalsInProgress education={profile.education} />
                 <GoalsCompleted education={profile.education} completedGoals={profile.completedgoals} />
-                <divmy-2>
-                    <button className="btn btn-dange" onClick={() => deleteAccount()}>
+                <divmy-2 className="delete-account-btn-container">
+                    <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
                         <i className="fas fa-user-minus"></i> Delete My Account
                     </button>
                 </divmy-2>

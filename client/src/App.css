@@ -606,8 +606,20 @@ button {
   margin-top: 30px;
 } */
 
+
 /* Dashboard */
 
 .dashboard-intro {
   margin-top: 30px;
+}
+
+/* .delete-account-btn-container {
+  display: block;
+  margin-top: 50px;
+  color: red;
+} */
+
+.delete-account-btn {
+  display: block;
+  margin-top: 50px;
 }

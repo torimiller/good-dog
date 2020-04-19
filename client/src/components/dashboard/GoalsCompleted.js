@@ -13,7 +13,8 @@ class GoalsCompleted extends React.Component {
             viewProgress: false,
             clickedProgress: [],
             goal: '',
-            goalId: ''
+            goalId: '',
+            completedGoalsExist: false
         }
     }
     render() {
@@ -71,16 +72,16 @@ class GoalsCompleted extends React.Component {
             <Fragment>
                 <h2 className="my2 goals-h2">Completed Goals</h2>
                 <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Goal</th>
-                            <th></th>
-                            {/* <th className="hide-sm">Date</th>
-                            <th className="hide-sm">Time Practiced</th>
-                            <th className="hide-sm">Notes</th> */}
-                            <th />
-                        </tr>
-                    </thead>
+                    {console.log('GoalsCompleted this.state:', this.state)}
+                {this.state.goal === '' && <p>You don't have any completed goals.</p>}
+                        {/* <thead>
+                            <tr>
+                                <th>Goal</th>
+                                <th></th>
+                                <th />
+                            </tr>
+                        </thead> */}
+                    
 
                     {this.state.viewProgress && (
                         

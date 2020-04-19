@@ -11,6 +11,8 @@ const Post = require('../../models/Post');
 // @desc    Get current user's profile
 // @access  Private
 router.get('/me', auth, async (req, res) => {
+    console.log('profile req:', req)
+
     try {
         // user pertains to the Profile model user field, which is going to be the objectId of the user
         const profile = await Profile.findOne({ user: req.user.id }).populate('user', 
@@ -44,23 +46,25 @@ router.post('/', [
         }
 
         const {
-            company,
-            website,
-            location,
-            bio,
-            status,
-            githubusername,
-            skills,
-            youtube,
-            facebook,
-            twitter,
-            instagram,
-            linkedin
+            // company,
+            // website,
+            // location,
+            // bio,
+            // status,
+            // githubusername,
+            // skills,
+            // youtube,
+            // facebook,
+            // twitter,
+            // instagram,
+            // linkedin
+            dogName
         } = req.body;
 
         // Build profile object
         const profileFields = {};
         profileFields.user = req.user.id;
+        if(dogName) profileFields.dogName = dogName;
         if(company) profileFields.company = company;
         if(website) profileFields.website = website;
         if(location) profileFields.location = location;

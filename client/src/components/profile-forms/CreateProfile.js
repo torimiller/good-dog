@@ -42,6 +42,7 @@ const CreateProfile = ({ createProfile, history }) => {
     const onSubmit = e => {
         e.preventDefault();
         createProfile(formData, history);
+        console.log('onSubmit ran')
     }
 
     return (

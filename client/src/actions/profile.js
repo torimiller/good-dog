@@ -70,7 +70,13 @@ export const getProfileById = userId => async dispatch => {
 // Create or update a profile
 // passing in a history object, which has a method called "push", that will redirect to a client-side route
 export const createProfile = (formData, history, edit = false) => async dispatch => {
+    console.log('createProfile ran')
+    console.log('createProfile formData', formData)
+    console.log('createProfile history', history)
+    console.log('createProfile edit', edit)
     try {
+        console.log('try catch in createProfile ran')
+
         const config = {
             headers: {
                 'Content-Type': 'application/json'
