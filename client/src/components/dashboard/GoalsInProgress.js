@@ -74,43 +74,29 @@ class GoalsInProgress extends React.Component {
             return (
             <tr key={edu._id}>
                 <td>{edu.goal}</td>
-                {/* <td>{date}</td>
-                <td>{timepracticed}</td>
-                <td>{notes}</td> */}
-                {/* <td className="hide-sm">{edu.degree}</td> */}
-                {/* <td>{date}</td>
-                <td>{edu.timepracticed}</td>
-                <td>{edu.notes}</td> */}
                 <td>
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        console.log('Edit button edu._id:', edu._id)
                         currentGoalId = edu._id;
                         this.setState({
                             editGoal: true,
                             goal: `${edu.goal}`,
                             goalId: `${edu._id}`
                         })
-                        console.log('this.state:', this.state)
                     }}>Add Progress</button>
                 </td>
                 <td>
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        console.log('View Progress edu:', edu)
-
                         edu.progress.map(progress => {
                             date = progress.date.toString().split('').slice(0, 10).join('');
                             timepracticed = progress.timepracticed;
                             notes = progress.notes;
                             let currentProgress = {date: date, timepracticed: timepracticed, notes: notes}
-                            console.log('progress inside map function:', progress)
                             this.state.clickedProgress.push(currentProgress);
                         })
-
-                        console.log('this.state.clickedProgress', this.state.clickedProgress)
 
                         this.setState({
                             viewProgress: true,
@@ -135,18 +121,26 @@ class GoalsInProgress extends React.Component {
             </tr>
         )});
 
+        const progresses = this.state.clickedProgress.map((progress, index) => {
+            console.log('progresses progress:', progress)
+            return (
+                <tr key={index} className="goal-progress">
+                    <td className="td-20">{progress.date}</td>
+                    <td className="td-20">{progress.timepracticed}</td>
+                    <td className="td-60">{progress.notes}</td>
+                </tr>
+            )
+        })
+
         return (
             <Fragment>
-                {console.log('this.props.profile:', this.props.profile)}
                 <h2 className="my2 goals-h2">Goals In Progress for { this.props.profile.dogName }</h2>
 
                 {this.state.goalName}
 
                 <table className="table">
-                    {console.log('GoalsInProgress this.props.education:', this.props.education)}
-                    {console.log('GoalsInProgress this.state.goal:', this.state.goal)}
                     {(goalArrayLength === 0) && <p>You don't have any goals in progress.</p>}
-                    {(goalArrayLength !== 0) && (
+                    {(goalArrayLength !== 0) && !this.state.viewProgress && (
                         <thead>
                             <tr>
                                 <th>Skill</th>
@@ -158,10 +152,6 @@ class GoalsInProgress extends React.Component {
                         </thead>
                     )
                     }
-
-                    {/* {this.props.education.length !== 0 (
-                        <p>You don't have any goals in progress.</p>
-                    )} */}
                     
 
                     {/* Editing current goal */}
@@ -214,22 +204,31 @@ class GoalsInProgress extends React.Component {
                     {this.state.viewProgress && (
                         
                         <div>
-                            
-                            {console.log('this.state.goalId:', this.state.goalId)}
-                            <h1>View Progress for {this.state.goal}</h1>
-                            <tr>
-                                <td>{this.state.goal}</td>
-                            </tr>
+                            <h1 className="view-progress-h1">View Progress for {this.state.goal}</h1>
 
-                            {this.state.clickedProgress.map(progress => {
+                            {/* {this.state.clickedProgress.map(progress => {
                                 return (
                                     <div className="goal-progress">
+                                            <thead>
+                                                <tr>Date</tr>
+                                            </thead>
                                         <p>Date: {progress.date}</p>
                                         <p>Time Practiced: {progress.timepracticed}</p>
                                         <p>Notes: {progress.notes}</p>
                                     </div>
                                 )
-                            })}
+                            })} */}
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time Practiced</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>{progresses}</tbody>
+                            </table>
 
                             <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
                                 this.setState({
@@ -244,7 +243,6 @@ class GoalsInProgress extends React.Component {
                     )}
 
                     {!this.state.editGoal && !this.state.viewProgress && <tbody>{educations}</tbody>}
-                    {console.log('educations:', educations)}
                 </table>
             </Fragment>
         )
