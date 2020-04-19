@@ -12,10 +12,12 @@ const Landing = ({ isAuthenticated }) => {
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1 className="x-large">Developer Connector</h1>
+          <h1 className="x-large">PuppyPal</h1>
           <p className="lead">
-            Create a developer profile/portfolio, share posts and get help from
-            other developers
+            Keep track of your dog's training progress with PuppyPal! Build a custom set of goals
+            to teach your dog, either by choosing from our list of skills, or creating your own. Each 
+            session of training can be logged for each goal. When your pup has mastered the skill,
+            you can add it to your collection of completed goals!
           </p>
           <div className="buttons">
             <Link to="/register" className="btn btn-primary">Sign Up</Link>

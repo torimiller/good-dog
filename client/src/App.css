@@ -49,6 +49,7 @@ img {
   font-size: 4rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  margin-top: 30px;
 }
 
 .large {
@@ -58,7 +59,7 @@ img {
 }
 
 .lead {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-bottom: 1rem;
 }
 
@@ -344,7 +345,7 @@ button {
 .landing-inner {
   color: #fff;
   height: 100%;
-  width: 80%;
+  width: 75%;
   margin: auto;
   display: flex;
   flex-direction: column;
