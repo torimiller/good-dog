@@ -5,29 +5,29 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    company: {
+    // company: {
+    //     type: String
+    // },
+    dogName: {
         type: String
     },
-    website: {
-        type: String
-    },
-    location: {
-        type: String
-    },
-    status: {
-        type: String,
-        required: true
-    },
-    skills: {
-        type: [String],
-        required: true
-    },
-    bio: {
-        type: String
-    },
-    githubusername: {
-        type: String
-    },
+    // location: {
+    //     type: String
+    // },
+    // status: {
+    //     type: String,
+    //     required: true
+    // },
+    // skills: {
+    //     type: [String],
+    //     required: true
+    // },
+    // bio: {
+    //     type: String
+    // },
+    // githubusername: {
+    //     type: String
+    // },
     experience: [
     {
         title: {
@@ -105,23 +105,23 @@ const ProfileSchema = new mongoose.Schema({
         ], 
     }
     ],
-    social: {
-        youtube: {
-            type: String
-        },
-        twitter: {
-            type: String
-        },
-        facebook: {
-            type: String
-        },
-        linkedin: {
-            type: String
-        },
-        instagram: {
-            type: String
-        }
-    },
+    // social: {
+    //     youtube: {
+    //         type: String
+    //     },
+    //     twitter: {
+    //         type: String
+    //     },
+    //     facebook: {
+    //         type: String
+    //     },
+    //     linkedin: {
+    //         type: String
+    //     },
+    //     instagram: {
+    //         type: String
+    //     }
+    // },
     date: {
         type: Date,
         default: Date.now

@@ -6,35 +6,35 @@ import { createProfile } from '../../actions/profile';
 
 const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
-        company: '',
-        website: '',
-        location: '',
-        status: '',
-        skills: '',
-        githubusername: '',
-        bio: '',
-        twitter: '',
-        facebook: '',
-        linkedin: '',
-        youtube: '',
-        instagram: ''
+        // company: '',
+        dogName: ''
+        // location: '',
+        // status: '',
+        // skills: '',
+        // githubusername: '',
+        // bio: '',
+        // twitter: '',
+        // facebook: '',
+        // linkedin: '',
+        // youtube: '',
+        // instagram: ''
     });
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
     const {
-        company,
-        website,
-        location,
-        status,
-        skills,
-        githubusername,
-        bio,
-        twitter,
-        facebook,
-        linkedin,
-        youtube,
-        instagram
+        //company,
+        dogName
+        // location,
+        // status,
+        // skills,
+        // githubusername,
+        // bio,
+        // twitter,
+        // facebook,
+        // linkedin,
+        // youtube,
+        // instagram
     } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,18 +47,17 @@ const CreateProfile = ({ createProfile, history }) => {
     return (
         <Fragment>
         <section className="container">
-        <h1 className="large text-primary">
+        <h1 className="large text-primary header-h1">
             Create Your Profile
         </h1>
-      <p className="lead">
+      {/* <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
-      </p>
-      <small>* = required field</small>
+      </p> */}
       <form className="form" onSubmit={e => onSubmit(e)}>
-        <div className="form-group">
+        {/* <div className="form-group">
           <select name="status" value={status} onChange={e => onChange(e)}>
-            <option value="0">* Select Professional Status</option>
+            <option value="0">Select Professional Status</option>
             <option value="Developer">Developer</option>
             <option value="Junior Developer">Junior Developer</option>
             <option value="Senior Developer">Senior Developer</option>
@@ -70,18 +69,11 @@ const CreateProfile = ({ createProfile, history }) => {
           </select>
           <small className="form-text"
             >Give us an idea of where you are at in your career</small>
-        </div>
+        </div> */}
         <div className="form-group">
-          <input type="text" placeholder="Company" name="company" value={company} onChange={e => onChange(e)} />
-          <small className="form-text"
-            >Could be your own company or one you work for</small>
+          <input type="text" placeholder="Dog's Name" name="dogName" value={dogName} onChange={e => onChange(e)} />
         </div>
-        <div className="form-group">
-          <input type="text" placeholder="Website" name="website" value={website} onChange={e => onChange(e)} />
-          <small className="form-text"
-            >Could be your own or a company website</small>
-        </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <input type="text" placeholder="Location" name="location" value={location} onChange={e => onChange(e)} />
           <small className="form-text"
             >City & state suggested (eg. Boston, MA)</small>
@@ -106,9 +98,9 @@ const CreateProfile = ({ createProfile, history }) => {
         <div className="form-group">
           <textarea placeholder="A short bio of yourself" name="bio" value={bio} onChange={e => onChange(e)}></textarea>
           <small className="form-text">Tell us a little about yourself</small>
-        </div>
+        </div> */}
 
-        <div className="my-2">
+        {/* <div className="my-2">
           <button onClick={() => toggleSocialInputs(!displaySocialInputs)} type="button" className="btn btn-light">
             Add Social Network Links
           </button>
@@ -140,7 +132,7 @@ const CreateProfile = ({ createProfile, history }) => {
             <i className="fab fa-instagram fa-2x"></i>
             <input type="text" placeholder="Instagram URL" name="instagram" value={instagram} onChange={e => onChange(e)} />
             </div>
-            </Fragment>}
+            </Fragment>} */}
 
         
         <input type="submit" className="btn btn-primary my-1" />

@@ -20,18 +20,17 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     //console.log('Dashboard profile:', profile)
 
     return loading && profile === null ? <Spinner /> : <Fragment>
-        <h1 className="large text-primary">Dashboard</h1>
+        <h1 className="large text-primary header-h1">Dashboard</h1>
         <p className="lead">
             <i className="fas fa-user"></i> Welcome { user && user.name }!
         </p>
-        <p><Link to='/add-education'><strong>Add a goal</strong></Link> to start training your pup. 
-            Keep track of your training progress in the <strong>Goals In Progress</strong> section. Each time you work on a 
-            skill, click <strong>Add Progress</strong> to log your training progress. Once you and your pup 
-            have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
         {profile !== null ? (
             <Fragment>
                 <DashboardActions />
-                {console.log('Dashboard profile:', profile)}
+                <p className="dashboard-intro"><Link to='/add-education'><strong>Add a goal</strong></Link> to start training your pup. 
+                Keep track of your training progress in the <strong>Goals In Progress</strong> section. Each time you work on a 
+                skill, click <strong>Add Progress</strong> to log your training progress. Once you and your pup 
+                have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
                 {/* <Experience experience={profile.experience} /> */}
                 <GoalsInProgress education={profile.education} />
                 <GoalsCompleted education={profile.education} completedGoals={profile.completedgoals} />
