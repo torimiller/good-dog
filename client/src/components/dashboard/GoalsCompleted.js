@@ -18,6 +18,7 @@ class GoalsCompleted extends React.Component {
         }
     }
     render() {
+        const completedGoalArrayLength = this.props.completedGoals.length;
         console.log('GoalsCompleted this.props:', this.props)
         var {education, completedGoals, deleteEducation} = this.props;
         console.log('education:', education)
@@ -73,16 +74,17 @@ class GoalsCompleted extends React.Component {
                 <h2 className="my2 goals-h2">Completed Goals for { this.props.profile.dogName }</h2>
                 <table className="table">
                     {console.log('GoalsCompleted this.state:', this.state)}
-                {this.state.goal === '' && <p>You don't have any completed goals.</p>}
-                        {/* <thead>
+                {(completedGoalArrayLength === 0) && <p>You don't have any completed goals.</p>}
+                {(completedGoalArrayLength !== 0) && (
+                    <thead>
                             <tr>
-                                <th>Goal</th>
+                                <th>Skill</th>
                                 <th></th>
                                 <th />
                             </tr>
-                        </thead> */}
-                    
-
+                        </thead>
+                )}
+                        
                     {this.state.viewProgress && (
                         
                         <div>

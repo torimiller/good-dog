@@ -13,7 +13,7 @@ class GoalsInProgress extends React.Component {
         this.state = {
             editGoal: false,
             viewProgress: false,
-            goalsInProgressExist: false,
+            goalsExist: false,
             clickedProgress: [],
             goalName: '',
             goalId: '',
@@ -55,9 +55,8 @@ class GoalsInProgress extends React.Component {
         })
     }
 
-    
-
     render() {
+        const goalArrayLength = this.props.education.length;
         console.log('GoalsInProgress this.props:', this.props)
         var { profile, education, deleteEducation, updateEducation, addCompletedGoal } = this.props;
         let currentGoalId;
@@ -145,20 +144,22 @@ class GoalsInProgress extends React.Component {
 
                 <table className="table">
                     {console.log('GoalsInProgress this.props.education:', this.props.education)}
-                    {/* {this.props.education === 0 ( */}
+                    {console.log('GoalsInProgress this.state.goal:', this.state.goal)}
+                    {(goalArrayLength === 0) && <p>You don't have any goals in progress.</p>}
+                    {(goalArrayLength !== 0) && (
                         <thead>
                             <tr>
-                                <th>Goal</th>
+                                <th>Skill</th>
                                 <th className="hide-sm"></th>
                                 <th className="hide-sm"></th>
                                 <th className="hide-sm"></th>
                                 <th />
                             </tr>
                         </thead>
-                    {/* )
-                    } */}
+                    )
+                    }
 
-                    {/* {this.props.education !== 0 (
+                    {/* {this.props.education.length !== 0 (
                         <p>You don't have any goals in progress.</p>
                     )} */}
                     
