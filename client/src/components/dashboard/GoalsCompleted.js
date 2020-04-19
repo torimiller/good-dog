@@ -70,7 +70,7 @@ class GoalsCompleted extends React.Component {
     
         return (
             <Fragment>
-                <h2 className="my2 goals-h2">Completed Goals</h2>
+                <h2 className="my2 goals-h2">Completed Goals for { this.props.profile.dogName }</h2>
                 <table className="table">
                     {console.log('GoalsCompleted this.state:', this.state)}
                 {this.state.goal === '' && <p>You don't have any completed goals.</p>}

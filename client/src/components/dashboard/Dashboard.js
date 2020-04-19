@@ -34,8 +34,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 skill, click <strong>Add Progress</strong> to log your training progress. Once you and your pup 
                 have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
                 {/* <Experience experience={profile.experience} /> */}
-                <GoalsInProgress education={profile.education} />
-                <GoalsCompleted education={profile.education} completedGoals={profile.completedgoals} />
+                <GoalsInProgress education={profile.education} profile={profile} />
+                <GoalsCompleted education={profile.education} completedGoals={profile.completedgoals} profile={profile} />
                 <divmy-2 className="delete-account-btn-container">
                     <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
                         <i className="fas fa-user-minus"></i> Delete My Account

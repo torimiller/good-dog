@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
 import { deleteEducation, updateEducation, addCompletedGoal } from '../../actions/profile';
+import profile from '../../reducers/profile';
 
 // education will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
@@ -57,7 +58,8 @@ class GoalsInProgress extends React.Component {
     
 
     render() {
-        var { education, deleteEducation, updateEducation, addCompletedGoal } = this.props;
+        console.log('GoalsInProgress this.props:', this.props)
+        var { profile, education, deleteEducation, updateEducation, addCompletedGoal } = this.props;
         let currentGoalId;
         const educations = education.map(edu => {
             let date;
@@ -136,7 +138,8 @@ class GoalsInProgress extends React.Component {
 
         return (
             <Fragment>
-                <h2 className="my2 goals-h2">Goals In Progress</h2>
+                {console.log('this.props.profile:', this.props.profile)}
+                <h2 className="my2 goals-h2">Goals In Progress for { this.props.profile.dogName }</h2>
 
                 {this.state.goalName}
 
