@@ -188,8 +188,6 @@ export const addEducation = (formData, history) => async dispatch => {
         }
 
         const res = await axios.put('/api/profile/education', formData, config);
-        console.log('addEducation res:', res)
-        console.log('console log after addEducation res')
 
         dispatch({
             type: UPDATE_PROFILE,
@@ -290,7 +288,7 @@ export const deleteEducation = id => async dispatch => {
             payload: res.data
         })
 
-        dispatch(setAlert('Education Removed', 'success'));
+        dispatch(setAlert('Goal Removed', 'success'));
     } catch (err) {
         dispatch({
             type: PROFILE_ERROR,
@@ -326,7 +324,7 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
                 payload: res.data
             })
     
-            dispatch(setAlert('Education Removed', 'success'));
+            dispatch(setAlert('Goal Removed', 'success'));
         } catch (err) {
             dispatch({
                 type: PROFILE_ERROR,
