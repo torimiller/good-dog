@@ -13,8 +13,6 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
-    //console.log('Dashboard props:', props)
-
 
     // If the profile is null and it's still loading, we want to show the spinner
     //console.log('Dashboard profile:', profile)
@@ -23,8 +21,6 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         <h1 className="large text-primary header-h1">Dashboard</h1>
         <p className="lead">
             <i className="fas fa-user"></i> Welcome { user && user.name }!
-            {console.log('Dashboard user:', user)}
-            {console.log('Dashboard profile:', profile)}
         </p>
         {profile !== null ? (
             <Fragment>
@@ -33,9 +29,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 Keep track of your training progress in the <strong>Goals In Progress</strong> section. Each time you work on a 
                 skill, click <strong>Add Progress</strong> to log your training progress. Once you and your pup 
                 have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
-                {/* <Experience experience={profile.experience} /> */}
-                <GoalsInProgress education={profile.education} profile={profile} />
-                <GoalsCompleted education={profile.education} completedGoals={profile.completedgoals} profile={profile} />
+                <GoalsInProgress goalsinprogress={profile.goalsinprogress} profile={profile} />
+                <GoalsCompleted goalsinprogress={profile.goalsinprogress} completedGoals={profile.completedgoals} profile={profile} />
                 <divmy-2 className="delete-account-btn-container">
                     <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
                         <i className="fas fa-user-minus"></i> Delete My Account

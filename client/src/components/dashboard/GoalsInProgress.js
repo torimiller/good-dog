@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
-import { deleteGoalInProgress, updateEducation, addCompletedGoal } from '../../actions/profile';
+import { deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } from '../../actions/profile';
 import profile from '../../reducers/profile';
 
-// education will be passed in from the parent component which is Dashboard.js
+// goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
     constructor(props) {
         super(props);
@@ -56,11 +56,11 @@ class GoalsInProgress extends React.Component {
     }
 
     render() {
-        const goalArrayLength = this.props.education.length;
+        const goalArrayLength = this.props.goalsinprogress.length;
         console.log('GoalsInProgress this.props:', this.props)
-        var { profile, education, deleteGoalInProgress, updateEducation, addCompletedGoal } = this.props;
+        var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
         let currentGoalId;
-        const educations = education.map(edu => {
+        const educations = goalsinprogress.map(edu => {
             let date;
             let timepracticed;
             let notes;
@@ -166,7 +166,7 @@ class GoalsInProgress extends React.Component {
                     e.preventDefault();
                     let id = this.state.goalId;
                     let progress = {date: this.state.date, timepracticed: this.state.timepracticed, notes: this.state.notes}
-                    updateEducation(id, progress)
+                    updateGoalInProgress(id, progress)
                     this.setState({
                         editGoal: false,
                         goalId: ''
@@ -250,10 +250,10 @@ class GoalsInProgress extends React.Component {
 }
 
 GoalsInProgress.propTypes = {
-    education: PropTypes.array.isRequired,
+    goalsinprogress: PropTypes.array.isRequired,
     deleteGoalInProgress: PropTypes.func.isRequired,
-    updateEducation: PropTypes.func.isRequired,
+    updateGoalInProgress: PropTypes.func.isRequired,
     addCompletedGoal: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteGoalInProgress, updateEducation, addCompletedGoal })(GoalsInProgress);
+export default connect(null, { deleteGoalInProgress, updateGoalInProgress, addCompletedGoal })(GoalsInProgress);

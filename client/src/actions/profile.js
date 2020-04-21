@@ -177,14 +177,14 @@ export const addGoalInProgress = (formData, history) => async dispatch => {
             }
         }
 
-        const res = await axios.put('/api/profile/education', formData, config);
+        const res = await axios.put('/api/profile/goalsinprogress', formData, config);
 
         dispatch({
             type: UPDATE_PROFILE,
             payload: res.data
         });
 
-        dispatch(setAlert('Education Added', 'success'));
+        dispatch(setAlert('Goal In Progress Added', 'success'));
 
         history.push('/dashboard');
     } catch (err) {
@@ -241,17 +241,17 @@ export const addGoalInProgress = (formData, history) => async dispatch => {
 //     }
 // };
 
-// Update education
-export const updateEducation = (id, progress) => async dispatch => {
+// Update goalsinprogress
+export const updateGoalInProgress = (id, progress) => async dispatch => {
     try {
-        const res = await axios.put(`/api/profile/education/${id}`, progress);
+        const res = await axios.put(`/api/profile/goalsinprogress/${id}`, progress);
 
         dispatch({
             type: UPDATE_PROFILE,
             payload: res.data
         })
 
-        dispatch(setAlert('Education Updated', 'success'));
+        dispatch(setAlert('Goal in Progress Updated', 'success'));
     } catch (err) {
         dispatch({
             type: PROFILE_ERROR,
@@ -261,11 +261,10 @@ export const updateEducation = (id, progress) => async dispatch => {
 };
 
 
-// Delete education
+// Delete goal in progress
 export const deleteGoalInProgress = id => async dispatch => {
-    console.log('actions deleteEducation ran')
     try {
-        const res = await axios.delete(`/api/profile/education/${id}`);
+        const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
 
         dispatch({
             type: UPDATE_PROFILE,
@@ -301,7 +300,7 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
         });
 
         try {
-            const res = await axios.delete(`/api/profile/education/${id}`);
+            const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
     
             dispatch({
                 type: UPDATE_PROFILE,

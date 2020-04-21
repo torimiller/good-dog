@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types'
 import { deleteGoalInProgress } from '../../actions/profile';
 
-// education will be passed in from the parent component which is Dashboard.js
+// goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsCompleted extends React.Component {
     constructor(props) {
         super(props);
@@ -20,9 +20,7 @@ class GoalsCompleted extends React.Component {
     render() {
         const completedGoalArrayLength = this.props.completedGoals.length;
         console.log('GoalsCompleted this.props:', this.props)
-        var {education, completedGoals, deleteGoalInProgress} = this.props;
-        console.log('education:', education)
-        console.log('completedGoals:', completedGoals)
+        var {goalsinprogress, completedGoals, deleteGoalInProgress} = this.props;
         const goalsCompleted = completedGoals.map(goalCompleted => {
             let date;
             let timepracticed;
@@ -62,7 +60,6 @@ class GoalsCompleted extends React.Component {
                 </td>
                 <td>
                     <button onClick={() => {
-                        console.log('Education delete onClick ran')
                         {/* deleteEducation(edu._id) */}
                     }} className='btn btn-danger'>Delete</button>
                 </td>
@@ -121,7 +118,7 @@ class GoalsCompleted extends React.Component {
 }
 
 GoalsCompleted.propTypes = {
-    education: PropTypes.array.isRequired,
+    goalsinprogress: PropTypes.array.isRequired,
     deleteGoalInProgress: PropTypes.func.isRequired
 }
 
