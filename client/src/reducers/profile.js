@@ -14,19 +14,11 @@ export default function(state = initialState, action) {
     switch(type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
-            // console.log('GET_PROFILE payload:', payload)
-            console.log('GET_PROFILE');
             return {
                 ...state,
                 profile: payload,
                 loading: false
             };
-        // case GET_PROFILES:
-        //     return {
-        //         ...state,
-        //         profiles: payload,
-        //         loading: false
-        //     }
         case PROFILE_ERROR:
             return {
                 ...state,

@@ -28,35 +28,35 @@ const ProfileSchema = new mongoose.Schema({
     // githubusername: {
     //     type: String
     // },
-    experience: [
-    {
-        title: {
-            type: String,
-            required: true
-        },
-        company: {
-            type: String,
-            required: true
-        },
-        location: {
-            type: String
-        },
-        from: {
-            type: Date,
-            required: true
-        },
-        to: {
-            type: Date
-        },
-        current: {
-            type: Boolean,
-            default: false
-        },
-        description: {
-            type: String
-        }
-    }
-    ],
+    // experience: [
+    // {
+    //     title: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     company: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     location: {
+    //         type: String
+    //     },
+    //     from: {
+    //         type: Date,
+    //         required: true
+    //     },
+    //     to: {
+    //         type: Date
+    //     },
+    //     current: {
+    //         type: Boolean,
+    //         default: false
+    //     },
+    //     description: {
+    //         type: String
+    //     }
+    // }
+    // ],
     education: [
         {
         goal: {
@@ -105,23 +105,6 @@ const ProfileSchema = new mongoose.Schema({
         ], 
     }
     ],
-    // social: {
-    //     youtube: {
-    //         type: String
-    //     },
-    //     twitter: {
-    //         type: String
-    //     },
-    //     facebook: {
-    //         type: String
-    //     },
-    //     linkedin: {
-    //         type: String
-    //     },
-    //     instagram: {
-    //         type: String
-    //     }
-    // },
     date: {
         type: Date,
         default: Date.now

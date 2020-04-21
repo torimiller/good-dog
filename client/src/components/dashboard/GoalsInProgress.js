@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
-import { deleteEducation, updateEducation, addCompletedGoal } from '../../actions/profile';
+import { deleteGoalInProgress, updateEducation, addCompletedGoal } from '../../actions/profile';
 import profile from '../../reducers/profile';
 
 // education will be passed in from the parent component which is Dashboard.js
@@ -58,7 +58,7 @@ class GoalsInProgress extends React.Component {
     render() {
         const goalArrayLength = this.props.education.length;
         console.log('GoalsInProgress this.props:', this.props)
-        var { profile, education, deleteEducation, updateEducation, addCompletedGoal } = this.props;
+        var { profile, education, deleteGoalInProgress, updateEducation, addCompletedGoal } = this.props;
         let currentGoalId;
         const educations = education.map(edu => {
             let date;
@@ -115,7 +115,7 @@ class GoalsInProgress extends React.Component {
                 </td>
                 <td>
                     <button onClick={() => {
-                        deleteEducation(edu._id)
+                        deleteGoalInProgress(edu._id)
                     }} className='btn btn-danger btn-goals'>Delete</button>
                 </td>
             </tr>
@@ -251,9 +251,9 @@ class GoalsInProgress extends React.Component {
 
 GoalsInProgress.propTypes = {
     education: PropTypes.array.isRequired,
-    deleteEducation: PropTypes.func.isRequired,
+    deleteGoalInProgress: PropTypes.func.isRequired,
     updateEducation: PropTypes.func.isRequired,
     addCompletedGoal: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteEducation, updateEducation, addCompletedGoal })(GoalsInProgress);
+export default connect(null, { deleteGoalInProgress, updateEducation, addCompletedGoal })(GoalsInProgress);

@@ -2,9 +2,9 @@ import React, { Fragment, useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addEducation } from '../../actions/profile';
+import { addGoalInProgress } from '../../actions/profile';
 
-const AddEducation = ({ addEducation, history }) => {
+const AddGoalInProgress = ({ addGoalInProgress, history }) => {
     const [formData, setFormData] = useState({
         // school: '',
         // degree: '',
@@ -24,10 +24,6 @@ const AddEducation = ({ addEducation, history }) => {
     const [toDateDisabled, toggleDisabled] = useState(false);
 
     const { goal, progress: { date, timepracticed, notes } } = formData;
-
-    console.log('formData:', formData)
-
-    console.log('AddEducation date:', date);
 
     const onChange = e => {
         console.log('onChange e.target:', e.target);
@@ -78,9 +74,7 @@ const AddEducation = ({ addEducation, history }) => {
             <form class="form" onSubmit={e => {
                     e.preventDefault();
                     //setFormData({...formData, progress: date, timepracticed, notes})
-                    console.log('AddEducation formData:', formData)
-                    console.log('AddEducation history:', history)
-                    addEducation(formData, history);
+                    addGoalInProgress(formData, history);
                 }}>
                 <div className="form-group">
                 <select name="goal" value={goal} onChange={e => onChange(e)}>
@@ -147,7 +141,6 @@ const AddEducation = ({ addEducation, history }) => {
                 )} */}
                 <div class="form-group">
                 <input type="date" placeholder="Date" name="date" value={date} onChange={e => onDateChange(e)} />
-                {console.log('date:', date)}
                 </div>
                 <div class="form-group">
                 <input type="text" placeholder="Time Practiced" name="timepracticed" value={timepracticed} onChange={e => onTimeChange(e)} />
@@ -168,8 +161,8 @@ const AddEducation = ({ addEducation, history }) => {
     )
 }
 
-AddEducation.propTypes = {
-    addEducation: PropTypes.func.isRequired
+AddGoalInProgress.propTypes = {
+    addGoalInProgress: PropTypes.func.isRequired
 }
 
-export default connect(null, { addEducation })(withRouter(AddEducation));
+export default connect(null, { addGoalInProgress })(withRouter(AddGoalInProgress));
