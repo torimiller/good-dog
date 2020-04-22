@@ -3,7 +3,6 @@ import { setAlert } from './alert';
 
 import {
     GET_PROFILE,
-    //GET_PROFILES,
     PROFILE_ERROR, 
     UPDATE_PROFILE,
     CLEAR_PROFILE,
@@ -26,26 +25,6 @@ export const getCurrentProfile = () => async dispatch => {
         });
     }
 };
-
-// Get all profiles
-// export const getProfiles = () => async dispatch => {
-//     console.log('getProfiles ran');
-//     dispatch({ type: CLEAR_PROFILE });
-
-//     try {
-//         const res = await axios.get('/api/profile');
-
-//         dispatch({
-//             type: GET_PROFILES,
-//             payload: res.data
-//         });
-//     } catch (err) {
-//         dispatch({
-//             type: PROFILE_ERROR,
-//             payload: { msg: err.response.statusText, status: err.response.status }
-//         });
-//     }
-// };
 
 // Get profile by ID
 export const getProfileById = userId => async dispatch => {    
@@ -101,73 +80,6 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 }
 
-// // Add Experience
-// export const addExperience = (formData, history) => async dispatch => {
-//     try {
-//         const config = {
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         }
-
-//         const res = await axios.put('/api/profile/experience', formData, config);
-
-//         dispatch({
-//             type: UPDATE_PROFILE,
-//             payload: res.data
-//         });
-
-//         dispatch(setAlert('Experience Added', 'success'));
-
-//         history.push('/dashboard');
-//     } catch (err) {
-//         const errors = err.response.data.errors;
-
-//         if(errors) {
-//             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-//         }
-
-//         dispatch({
-//             type: PROFILE_ERROR,
-//             payload: { msg: err.response.statusText, status: err.response.status }
-//         }); 
-//     }
-// }
-
-// // Add Goal In Progress
-// export const addGoalInProgress = (formData, history) => async dispatch => {
-//     try {
-//         const config = {
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         }
-
-//         const res = await axios.put('/api/profile/goalinprogress', formData, config);
-
-//         dispatch({
-//             type: UPDATE_PROFILE,
-//             payload: res.data
-//         });
-
-//         dispatch(setAlert('Goal In Progress Added', 'success'));
-
-//         history.push('/dashboard');
-//     } catch (err) {
-//         console.log('err.response:', err.response)
-//         const errors = err.response.data.errors;
-
-//         if(errors) {
-//             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-//         }
-
-//         dispatch({
-//             type: PROFILE_ERROR,
-//             payload: { msg: err.response.statusText, status: err.response.status }
-//         }); 
-//     }
-// }
-
 // Add Goal in Progress
 export const addGoalInProgress = (formData, history) => async dispatch => {
     try {
@@ -200,46 +112,6 @@ export const addGoalInProgress = (formData, history) => async dispatch => {
         }); 
     }
 }
-
-// Delete experience
-// export const deleteExperience = id => async dispatch => {
-//     console.log('deleteExperience ran')
-//     try {
-//         const res = await axios.delete(`/api/profile/experience/${id}`);
-
-//         dispatch({
-//             type: UPDATE_PROFILE,
-//             payload: res.data
-//         })
-
-//         dispatch(setAlert('Experience Removed', 'success'));
-//     } catch (err) {
-//         dispatch({
-//             type: PROFILE_ERROR,
-//             payload: { msg: err.response.statusText, status: err.response.status }
-//         }); 
-//     }
-// };
-
-// Delete goal in progress
-// export const deleteGoalInProgress = id => async dispatch => {
-//     console.log('deleteGoalInProgress ran')
-//     try {
-//         const res = await axios.delete(`/api/profile/goalinprogress/${id}`);
-
-//         dispatch({
-//             type: UPDATE_PROFILE,
-//             payload: res.data
-//         })
-
-//         dispatch(setAlert('Experience Removed', 'success'));
-//     } catch (err) {
-//         dispatch({
-//             type: PROFILE_ERROR,
-//             payload: { msg: err.response.statusText, status: err.response.status }
-//         }); 
-//     }
-// };
 
 // Update goalsinprogress
 export const updateGoalInProgress = (id, progress) => async dispatch => {
@@ -282,9 +154,7 @@ export const deleteGoalInProgress = id => async dispatch => {
 
 // Add to Completed Goals
 export const addCompletedGoal = (goal, id) => async dispatch => {
-    console.log('addCompletedGoal action goal:', goal)
     try {
-        console.log('addCompletedGoal try block ran');
         const config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -292,7 +162,6 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
         }
 
         const res = await axios.put('/api/profile/completedgoals', goal, config);
-        console.log('addCompletedGoal res:', res)
 
         dispatch({
             type: UPDATE_PROFILE,
@@ -317,8 +186,6 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
 
         dispatch(setAlert('Completed Goal Added', 'success'));
     } catch (err) {
-        console.log('err:', err)
-        console.log('err.response:', err.response)
         const errors = err.response.data.errors;
 
         if(errors) {
@@ -331,6 +198,27 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
         }); 
     }
 }
+
+
+// Delete completed goal
+export const deleteCompletedGoal = id => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/profile/completedgoals/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        })
+
+        dispatch(setAlert('Goal Removed', 'success'));
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        }); 
+    }
+};
+
 
 // Delete account & profile
 export const deleteAccount = () => async dispatch => {

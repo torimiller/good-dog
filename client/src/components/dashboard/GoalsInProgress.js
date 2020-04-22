@@ -25,9 +25,6 @@ class GoalsInProgress extends React.Component {
         this.handleDate = this.handleDate.bind(this);
         this.handleTimePracticed = this.handleTimePracticed.bind(this);
         this.handleNotes = this.handleNotes.bind(this);
-
-        console.log('GoalsInProgress props:', props)
-
     }
 
     handleEditGoalClick(e) {
@@ -57,7 +54,6 @@ class GoalsInProgress extends React.Component {
 
     render() {
         const goalArrayLength = this.props.goalsinprogress.length;
-        console.log('GoalsInProgress this.props:', this.props)
         var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
         let currentGoalId;
         const educations = goalsinprogress.map(edu => {
@@ -122,7 +118,6 @@ class GoalsInProgress extends React.Component {
         )});
 
         const progresses = this.state.clickedProgress.map((progress, index) => {
-            console.log('progresses progress:', progress)
             return (
                 <tr key={index} className="goal-progress">
                     <td className="td-20">{progress.date}</td>
@@ -205,20 +200,6 @@ class GoalsInProgress extends React.Component {
                         
                         <div>
                             <h1 className="view-progress-h1">View Progress for {this.state.goal}</h1>
-
-                            {/* {this.state.clickedProgress.map(progress => {
-                                return (
-                                    <div className="goal-progress">
-                                            <thead>
-                                                <tr>Date</tr>
-                                            </thead>
-                                        <p>Date: {progress.date}</p>
-                                        <p>Time Practiced: {progress.timepracticed}</p>
-                                        <p>Notes: {progress.notes}</p>
-                                    </div>
-                                )
-                            })} */}
-
                             <table>
                                 <thead>
                                     <tr>

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
-//import Experience from './Experience';
 import GoalsInProgress from './GoalsInProgress';
 import GoalsCompleted from './GoalsCompleted';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
@@ -31,6 +30,13 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
                 <GoalsInProgress goalsinprogress={profile.goalsinprogress} profile={profile} />
                 <GoalsCompleted goalsinprogress={profile.goalsinprogress} completedGoals={profile.completedgoals} profile={profile} />
+                <divmy-2>
+                    <Link to='/edit-profile'>
+                        <i className="fas fa-user-minus"></i> Edit Profile
+                    </Link>
+                    {/* <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}> */}
+                    {/* </button> */}
+                </divmy-2>
                 <divmy-2 className="delete-account-btn-container">
                     <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
                         <i className="fas fa-user-minus"></i> Delete My Account

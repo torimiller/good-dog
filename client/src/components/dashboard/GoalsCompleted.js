@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types'
-import { deleteGoalInProgress } from '../../actions/profile';
+import { deleteCompletedGoal } from '../../actions/profile';
 
 // goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsCompleted extends React.Component {
@@ -19,34 +19,24 @@ class GoalsCompleted extends React.Component {
     }
     render() {
         const completedGoalArrayLength = this.props.completedGoals.length;
-        console.log('GoalsCompleted this.props:', this.props)
-        var {goalsinprogress, completedGoals, deleteGoalInProgress} = this.props;
+        var {goalsinprogress, completedGoals, deleteCompletedGoal} = this.props;
         const goalsCompleted = completedGoals.map(goalCompleted => {
             let date;
             let timepracticed;
             let notes;
-            //console.log('edu:', edu)
-            // const date = edu.date.toString().split('').slice(0, 9).join('');
-            //console.log('date:', date)
             return (
             <tr key={goalCompleted._id}>
                 <td>{goalCompleted.goal}</td>
-                {/* <td className="hide-sm">{edu.degree}</td> */}
-                {/* <td>{date}</td>
-                <td>{edu.timepracticed}</td>
-                <td>{edu.notes}</td> */}
                 <td>
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        console.log('View Progress goalCompleted:', goalCompleted)
 
                         goalCompleted.progress.map(progress => {
                             date = progress.date.toString().split('').slice(0, 10).join('');
                             timepracticed = progress.timepracticed;
                             notes = progress.notes;
                             let currentProgress = {date: date, timepracticed: timepracticed, notes: notes}
-                            console.log('currentProgress inside map function:', currentProgress)
                             this.state.clickedProgress.push(currentProgress);
                         })
 
@@ -60,7 +50,7 @@ class GoalsCompleted extends React.Component {
                 </td>
                 <td>
                     <button onClick={() => {
-                        {/* deleteEducation(edu._id) */}
+                        deleteCompletedGoal(goalCompleted._id)
                     }} className='btn btn-danger'>Delete</button>
                 </td>
             </tr>
@@ -70,7 +60,6 @@ class GoalsCompleted extends React.Component {
             <Fragment>
                 <h2 className="my2 goals-h2">Completed Goals for { this.props.profile.dogName }</h2>
                 <table className="table">
-                    {console.log('GoalsCompleted this.state:', this.state)}
                 {(completedGoalArrayLength === 0) && <p>You don't have any completed goals.</p>}
                 {(completedGoalArrayLength !== 0) && (
                     <thead>
@@ -88,7 +77,6 @@ class GoalsCompleted extends React.Component {
                             <h1>View Progress for {this.state.goal}</h1>
 
                             {this.state.clickedProgress.map(progress => {
-                                console.log('progress inside this.state.clickedProgress.map:', progress)
                                 return (
                                     <div className="goal-progress">
                                         <p>Date: {progress.date}</p>
@@ -119,7 +107,7 @@ class GoalsCompleted extends React.Component {
 
 GoalsCompleted.propTypes = {
     goalsinprogress: PropTypes.array.isRequired,
-    deleteGoalInProgress: PropTypes.func.isRequired
+    deleteCompletedGoal: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteGoalInProgress })(GoalsCompleted);
+export default connect(null, { deleteCompletedGoal })(GoalsCompleted);

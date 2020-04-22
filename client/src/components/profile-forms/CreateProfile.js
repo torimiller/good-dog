@@ -42,7 +42,6 @@ const CreateProfile = ({ createProfile, history }) => {
     const onSubmit = e => {
         e.preventDefault();
         createProfile(formData, history);
-        console.log('onSubmit ran')
     }
 
     return (
@@ -51,10 +50,9 @@ const CreateProfile = ({ createProfile, history }) => {
         <h1 className="large text-primary header-h1">
             Create Your Profile
         </h1>
-      {/* <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
-        profile stand out
-      </p> */}
+          <p className="lead">
+            What's your pup's name?
+          </p>
       <form className="form" onSubmit={e => onSubmit(e)}>
         {/* <div className="form-group">
           <select name="status" value={status} onChange={e => onChange(e)}>
