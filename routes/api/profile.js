@@ -33,13 +33,7 @@ router.get('/me', auth, async (req, res) => {
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private
-router.post('/', [ 
-    auth, 
-        // [
-        //     check('status', 'Status is required').not().isEmpty(),
-        //     check('skills', 'Skills is required').not().isEmpty(),
-        // ] 
-    ], 
+router.post('/', [ auth ], 
     async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
@@ -47,18 +41,6 @@ router.post('/', [
         }
 
         const {
-            // company,
-            // website,
-            // location,
-            // bio,
-            // status,
-            // githubusername,
-            // skills,
-            // youtube,
-            // facebook,
-            // twitter,
-            // instagram,
-            // linkedin
             dogName
         } = req.body;
 
@@ -66,23 +48,6 @@ router.post('/', [
         const profileFields = {};
         profileFields.user = req.user.id;
         if(dogName) profileFields.dogName = dogName;
-        // if(company) profileFields.company = company;
-        // if(website) profileFields.website = website;
-        // if(location) profileFields.location = location;
-        // if(bio) profileFields.bio = bio;
-        // if(status) profileFields.status = status;
-        // if(githubusername) profileFields.githubusername = githubusername;
-        // if(skills) {
-        //     profileFields.skills = skills.split(',').map(skill => skill.trim());
-        // }
-
-        // Build social array
-        // profileFields.social = {}
-        // if (youtube) profileFields.social.youtube = youtube;
-        // if (twitter) profileFields.social.twitter = twitter;
-        // if (facebook) profileFields.social.facebook = facebook;
-        // if (linkedin) profileFields.social.linkedin = linkedin;
-        // if (instagram) profileFields.social.instagram = instagram;
 
         try {
             let profile = await Profile.findOne({ user: req.user.id });

@@ -14,8 +14,6 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     }, [getCurrentProfile]);
 
     // If the profile is null and it's still loading, we want to show the spinner
-    //console.log('Dashboard profile:', profile)
-
     return loading && profile === null ? <Spinner /> : <Fragment>
         <h1 className="large text-primary header-h1">Dashboard</h1>
         <p className="lead">
@@ -24,19 +22,12 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         {profile !== null ? (
             <Fragment>
                 <DashboardActions />
-                <p className="dashboard-intro"><Link to='/add-education'><strong>Add a goal</strong></Link> to start training your pup. 
+                <p className="dashboard-intro"><Link to='/add-goal-in-progress'><strong>Add a goal</strong></Link> to start training your pup. 
                 Keep track of your training progress in the <strong>Goals In Progress</strong> section. Each time you work on a 
                 skill, click <strong>Add Progress</strong> to log your training progress. Once you and your pup 
                 have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
                 <GoalsInProgress goalsinprogress={profile.goalsinprogress} profile={profile} />
                 <GoalsCompleted goalsinprogress={profile.goalsinprogress} completedGoals={profile.completedgoals} profile={profile} />
-                <divmy-2>
-                    <Link to='/edit-profile'>
-                        <i className="fas fa-user-minus"></i> Edit Profile
-                    </Link>
-                    {/* <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}> */}
-                    {/* </button> */}
-                </divmy-2>
                 <divmy-2 className="delete-account-btn-container">
                     <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
                         <i className="fas fa-user-minus"></i> Delete My Account
