@@ -68,7 +68,7 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                 Add Your Training Goals
             </h1>
             <p class="lead">
-            <i class="fas fa-dog"></i> Add a skill you would like to teach your dog
+            <i class="fas fa-dog" alt=""></i> Add a skill you would like to teach your dog
             </p>
             
             <form class="form" onSubmit={e => {
@@ -96,49 +96,7 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                     <option value="Create Your Own">Or Create Your Own!</option>
                 </select>
                 </div>
-                {/* <div class="form-group">
-                <input type="text" placeholder="* School or Bootcamp" name="school" value={school} onChange={e => onChange(e)} required />
-                </div>
-                <div class="form-group">
-                <input type="text" placeholder="* Degree or Certificate" name="degree" value={degree} onChange={e => onChange(e)} required />
-                </div>
-                <div class="form-group">
-                <input type="text" placeholder="Field of Study" name="fieldofstudy" value={fieldofstudy} onChange={e => onChange(e)} />
-                </div>
-                <div class="form-group">
-                <h4>From Date</h4>
-                <input type="date" name="from" value={from} onChange={e => onChange(e)} />
-                </div>
-                <div class="form-group">
-                <p><input type="checkbox" name="current" checked={current} value={current} onChange={e => {
-                    setFormData({ ...formData, current: !current });
-                    toggleDisabled(!toDateDisabled);
-                }} /> {' '}Current School</p>
-                </div>
-                <div class="form-group">
-                <h4>To Date</h4>
-                <input type="date" name="to" value={to} onChange={e => onChange(e)} disabled={toDateDisabled ? 'disabled' : ''} />
-                </div>
-                <div class="form-group">
-                <textarea
-                    name="description"
-                    cols="30"
-                    rows="5"
-                    placeholder="Program Description"
-                    value={description} onChange={e => onChange(e)}
-                ></textarea>
-                </div> */}
                 {goal === 'Create Your Own!' ? <input type="text" placeholder="Goal" name="goal" /> : <input type="text" placeholder="Goal" name="goal" value={goal} onChange={e => onChange(e)} />}
-                {/* {goal === 'Create Your Own!' && (
-                    <div>
-                        <input type="text" placeholder="Goal" name="goal" required />
-                    </div>
-                )}
-                {goal !== 'Create Your Own!' && (
-                    <div>
-                        <input type="text" placeholder="Goal" name="goal" value={goal} onChange={e => onChange(e)} required />
-                    </div>
-                )} */}
                 <div class="form-group">
                 <input type="date" placeholder="Date" name="date" value={date} onChange={e => onDateChange(e)} />
                 </div>

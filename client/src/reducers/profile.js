@@ -27,6 +27,7 @@ export default function(state = initialState, action) {
                 profile: null
             };
         case CLEAR_PROFILE:
+            console.log('CLEAR_PROFILE ran in profile reducer');
             return {
                 ...state,
                 profile: null,

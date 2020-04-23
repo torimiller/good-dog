@@ -17,7 +17,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     return loading && profile === null ? <Spinner /> : <Fragment>
         <h1 className="large text-primary header-h1">Dashboard</h1>
         <p className="lead">
-            <i className="fas fa-user"></i> Welcome { user && user.name }!
+            <i className="fas fa-user" alt=""></i> Welcome { user && user.name }!
         </p>
         {profile !== null ? (
             <Fragment>
@@ -30,7 +30,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 <GoalsCompleted goalsinprogress={profile.goalsinprogress} completedGoals={profile.completedgoals} profile={profile} />
                 <divmy-2 className="delete-account-btn-container">
                     <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
-                        <i className="fas fa-user-minus"></i> Delete My Account
+                        <i className="fas fa-user-minus" alt=""></i> Delete My Account
                     </button>
                 </divmy-2>
             </Fragment>

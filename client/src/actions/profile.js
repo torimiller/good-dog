@@ -135,20 +135,22 @@ export const updateGoalInProgress = (id, progress) => async dispatch => {
 
 // Delete goal in progress
 export const deleteGoalInProgress = id => async dispatch => {
-    try {
-        const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
-
-        dispatch({
-            type: UPDATE_PROFILE,
-            payload: res.data
-        })
-
-        dispatch(setAlert('Goal Removed', 'success'));
-    } catch (err) {
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: { msg: err.response.statusText, status: err.response.status }
-        }); 
+    if(window.confirm('Are you sure you want to delete this goal?')) {
+        try {
+            const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
+    
+            dispatch({
+                type: UPDATE_PROFILE,
+                payload: res.data
+            })
+    
+            dispatch(setAlert('Goal Removed', 'success'));
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status }
+            }); 
+        }
     }
 };
 
@@ -202,21 +204,23 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
 
 // Delete completed goal
 export const deleteCompletedGoal = id => async dispatch => {
-    try {
-        const res = await axios.delete(`/api/profile/completedgoals/${id}`);
-
-        dispatch({
-            type: UPDATE_PROFILE,
-            payload: res.data
-        })
-
-        dispatch(setAlert('Goal Removed', 'success'));
-    } catch (err) {
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: { msg: err.response.statusText, status: err.response.status }
-        }); 
-    }
+    if(window.confirm('Are you sure you want to delete this goal?')) {
+        try {
+            const res = await axios.delete(`/api/profile/completedgoals/${id}`);
+    
+            dispatch({
+                type: UPDATE_PROFILE,
+                payload: res.data
+            })
+    
+            dispatch(setAlert('Goal Removed', 'success'));
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status }
+            }); 
+        }
+    }  
 };
 
 
@@ -224,6 +228,8 @@ export const deleteCompletedGoal = id => async dispatch => {
 export const deleteAccount = () => async dispatch => {
     if(window.confirm('Are you sure? This can NOT be undone!')) {
         try {
+            await axios.delete('/api/profile');
+
             dispatch({ type: CLEAR_PROFILE })
             dispatch({ type: ACCOUNT_DELETED })
     
