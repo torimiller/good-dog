@@ -303,6 +303,10 @@ button {
   background: var(--light-color);
 }
 
+.form-fieldset {
+  padding: 10px;
+}
+
 /* Navbar */
 .navbar {
   display: flex;
@@ -600,14 +604,14 @@ button {
 }
 
 .goals-h2 {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 /* .goal-btn {
   margin-top: 30px;
 } */
 
-.view-progress-h1 {
+.view-progress-h3, .add-entry-h3 {
   margin-top: 20px;
   color: #606060;
 }

@@ -156,49 +156,52 @@ export const deleteGoalInProgress = id => async dispatch => {
 
 // Add to Completed Goals
 export const addCompletedGoal = (goal, id) => async dispatch => {
-    try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
-        const res = await axios.put('/api/profile/completedgoals', goal, config);
-
-        dispatch({
-            type: UPDATE_PROFILE,
-            payload: res.data
-        });
-
+    if(window.confirm('Are you sure your dog has mastered this skill?')) {
         try {
-            const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+    
+            const res = await axios.put('/api/profile/completedgoals', goal, config);
     
             dispatch({
                 type: UPDATE_PROFILE,
                 payload: res.data
-            })
+            });
     
-            dispatch(setAlert('Goal Removed', 'success'));
+            try {
+                const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
+        
+                dispatch({
+                    type: UPDATE_PROFILE,
+                    payload: res.data
+                })
+        
+                //dispatch(setAlert('Goal Removed', 'success'));
+            } catch (err) {
+                dispatch({
+                    type: PROFILE_ERROR,
+                    payload: { msg: err.response.statusText, status: err.response.status }
+                }); 
+            }
+    
+            dispatch(setAlert('Completed Goal Added', 'success'));
         } catch (err) {
+            const errors = err.response.data.errors;
+    
+            if(errors) {
+                errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            }
+    
             dispatch({
                 type: PROFILE_ERROR,
                 payload: { msg: err.response.statusText, status: err.response.status }
             }); 
         }
-
-        dispatch(setAlert('Completed Goal Added', 'success'));
-    } catch (err) {
-        const errors = err.response.data.errors;
-
-        if(errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        }
-
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: { msg: err.response.statusText, status: err.response.status }
-        }); 
     }
+    
 }
 
 

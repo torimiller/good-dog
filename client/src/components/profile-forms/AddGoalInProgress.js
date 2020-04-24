@@ -67,16 +67,18 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
             <h1 class="large text-primary">
                 Add Your Training Goals
             </h1>
-            <p class="lead">
+            {/* <p class="lead">
             <i class="fas fa-dog" alt=""></i> Add a skill you would like to teach your dog
-            </p>
+            </p> */}
             
-            <form class="form" onSubmit={e => {
+            <form className="form" onSubmit={e => {
                     e.preventDefault();
                     //setFormData({...formData, progress: date, timepracticed, notes})
                     addGoalInProgress(formData, history);
                 }}>
-                <div className="form-group">
+                <fieldset className="form-fieldset">
+                    <legend className="lead"><i className="fas fa-dog" alt=""></i> Add a skill you would like to teach your dog</legend>
+                    <div className="form-group">
                 <select name="goal" value={goal} onChange={e => onChange(e)}>
                     {console.log('goal:', goal)}
                     <option value="0">Choose from a list of skills</option>
@@ -98,22 +100,27 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                 </div>
                 {goal === 'Create Your Own!' ? <input type="text" placeholder="Goal" name="goal" /> : <input type="text" placeholder="Goal" name="goal" value={goal} onChange={e => onChange(e)} />}
                 <div class="form-group">
+                <label for="date">Date</label>
                 <input type="date" placeholder="Date" name="date" value={date} onChange={e => onDateChange(e)} />
                 </div>
                 <div class="form-group">
-                <input type="text" placeholder="Time Practiced" name="timepracticed" value={timepracticed} onChange={e => onTimeChange(e)} />
+                <label for="time-practiced">Time Practiced</label>
+                <input type="text" placeholder="15 Minutes" name="timepracticed" value={timepracticed} onChange={e => onTimeChange(e)} />
                 </div>
                 <div class="form-group">
+                <label for="notes">Notes</label>
                 <textarea
                     name="notes"
                     cols="30"
                     rows="5"
-                    placeholder="Notes"
+                    placeholder="Dog responded to command, but only when treat was in sight."
                     value={notes} onChange={e => onNotesChange(e)}
                 ></textarea>
                 </div>
                 <input type="submit" class="btn btn-primary my-1" />
                 <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
+                </fieldset>
+                
             </form>
         </Fragment>
     )
