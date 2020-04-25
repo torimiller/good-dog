@@ -8,12 +8,13 @@
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "mocha --exit"
+    "test": "node_modules/mocha/bin/mocha ./test"
   },
   "author": "Tori Miller",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chai-http": "^4.3.0",
     "config": "^3.3.0",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
@@ -21,10 +22,13 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.3",
     "request": "^2.88.2"
-
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "concurrently": "^5.1.0",
-    "nodemon": "^2.0.2"
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2",
+    "superagent": "^5.2.2",
+    "supertest": "^4.0.2"
   }
 }
