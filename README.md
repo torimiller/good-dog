@@ -14,7 +14,7 @@ PuppyPal's functionality includes:
 	Ability to delete goals in progress and completed goals
 
 APPLICATION WEBSITE
-View a working prototype here: (website url goes here)
+View a working prototype here: (https://mysterious-retreat-15685.herokuapp.com/)
 
 
 SECURITY
@@ -50,3 +50,4 @@ Profile
 
 
 Include screenshot(s) of your app. This makes your app description much easier to understand.
+DASHBOARD:

@@ -173,7 +173,7 @@ img {
 .bg-light,
 .badge-light,
 .alert-light {
-  background: var(--light-color);
+  background: #CBDBD7;
   color: #333;
 }
 
@@ -291,6 +291,14 @@ button {
 }
 .form .social-input i.fa-linkedin {
   color: #0077b5;
+}
+
+.table {
+  width: 100%;
+}
+
+.completed-table {
+  width: 50%;
 }
 
 .table th,

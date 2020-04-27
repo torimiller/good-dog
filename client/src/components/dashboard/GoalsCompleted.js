@@ -59,7 +59,7 @@ class GoalsCompleted extends React.Component {
         return (
             <Fragment>
                 <h2 className="my2 goals-h2">Completed Goals for { this.props.profile.dogName }</h2>
-                <table className="table">
+                <table className="table completed-table">
                 {(completedGoalArrayLength === 0) && <p>You don't have any completed goals.</p>}
                 {(completedGoalArrayLength !== 0) && (
                     <thead>

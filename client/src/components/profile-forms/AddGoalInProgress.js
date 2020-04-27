@@ -99,15 +99,15 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                 </select>
                 </div>
                 {goal === 'Create Your Own!' ? <input type="text" placeholder="Goal" name="goal" /> : <input type="text" placeholder="Goal" name="goal" value={goal} onChange={e => onChange(e)} />}
-                <div class="form-group">
+                {/* <div class="form-group">
                 <label for="date">Date</label>
                 <input type="date" placeholder="Date" name="date" value={date} onChange={e => onDateChange(e)} />
-                </div>
-                <div class="form-group">
+                </div> */}
+                {/* <div class="form-group">
                 <label for="time-practiced">Time Practiced</label>
                 <input type="text" placeholder="15 Minutes" name="timepracticed" value={timepracticed} onChange={e => onTimeChange(e)} />
-                </div>
-                <div class="form-group">
+                </div> */}
+                {/* <div class="form-group">
                 <label for="notes">Notes</label>
                 <textarea
                     name="notes"
@@ -116,7 +116,7 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                     placeholder="Dog responded to command, but only when treat was in sight."
                     value={notes} onChange={e => onNotesChange(e)}
                 ></textarea>
-                </div>
+                </div> */}
                 <input type="submit" class="btn btn-primary my-1" />
                 <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
                 </fieldset>

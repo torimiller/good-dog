@@ -52,6 +52,8 @@ class GoalsInProgress extends React.Component {
         })
     }
 
+    
+
     render() {
         const goalArrayLength = this.props.goalsinprogress.length;
         var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
@@ -62,7 +64,10 @@ class GoalsInProgress extends React.Component {
             let notes;
 
             edu.progress.map(progress => {
-                date = progress.date.toString().split('').slice(0, 10).join('');
+                console.log('progress:', progress)
+                if (progress.date !== null) {
+                    date = progress.date.toString().split('').slice(0, 10).join('');
+                }
                 timepracticed = progress.timepracticed;
                 notes = progress.notes;
             })
@@ -79,7 +84,7 @@ class GoalsInProgress extends React.Component {
                             editGoal: true,
                             goal: `${edu.goal}`,
                             goalId: `${edu._id}`
-                        })
+                        });
                     }}>Add Progress</button>
                 </td>
                 <td>
@@ -87,7 +92,9 @@ class GoalsInProgress extends React.Component {
                     className='btn btn-success btn-goals' 
                     onClick={() => {
                         edu.progress.map(progress => {
-                            date = progress.date.toString().split('').slice(0, 10).join('');
+                            if (progress.date !== null) {
+                                date = progress.date.toString().split('').slice(0, 10).join('');
+                            }
                             timepracticed = progress.timepracticed;
                             notes = progress.notes;
                             let currentProgress = {date: date, timepracticed: timepracticed, notes: notes}
@@ -106,6 +113,10 @@ class GoalsInProgress extends React.Component {
                     className='btn btn-success btn-goals' 
                     onClick={() => {
                         addCompletedGoal(edu, edu._id);
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
                     }}>Completed
                 </button>
                 </td>
@@ -117,7 +128,9 @@ class GoalsInProgress extends React.Component {
             </tr>
         )});
 
-        const progresses = this.state.clickedProgress.map((progress, index) => {
+        let progresses;
+
+        progresses = this.state.clickedProgress.map((progress, index) => {
             return (
                 <tr key={index} className="goal-progress">
                     <td className="td-20">{progress.date}</td>
@@ -126,6 +139,11 @@ class GoalsInProgress extends React.Component {
                 </tr>
             )
         })
+
+        progresses.shift();
+
+        console.log('progresses', progresses)
+        //console.log('goalProgress:', goalProgress)
 
         return (
             <Fragment>
@@ -160,25 +178,30 @@ class GoalsInProgress extends React.Component {
                         this.setState({
                             editGoal: false,
                             goalId: ''
-                        })
+                        });
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
                     }}>
 
                         <fieldset className="form-fieldset">
                         <legend className="lead"><i className="fas fa-dog" alt=""></i> Add New Entry for {this.state.goal}</legend>
                             <div class="form-group">
-                                <label for="date">Date</label>
+                                <label for="date">Today's Date</label>
                                 <input type="date" placeholder="Date" name="date" value={this.state.date} onChange={this.handleDate} />
                             </div>
                             <div class="form-group">
-                                <label for="time-practiced"></label>
-                                <input type="text" placeholder="Time Practiced" name="timepracticed" value={this.state.timepracticed} onChange={this.handleTimePracticed} />
+                                <label for="time-practiced">Time Practiced</label>
+                                <input type="text" placeholder="Example: 20 minutes" name="timepracticed" value={this.state.timepracticed} onChange={this.handleTimePracticed} />
                             </div>
                             <div class="form-group">
+                                <label for="notes">Notes</label>
                                 <textarea
                                     name="notes"
                                     cols="30"
                                     rows="5"
-                                    placeholder="Notes"
+                                    placeholder="Example: Dog responded to command, but only when treat was in sight."
                                     value={this.state.notes} onChange={this.handleNotes}
                                 ></textarea>
                             </div>

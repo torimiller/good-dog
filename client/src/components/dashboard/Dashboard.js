@@ -24,7 +24,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                 <DashboardActions />
                 <p className="dashboard-intro"><Link to='/add-goal-in-progress'><strong>Add a goal</strong></Link> to start training your pup. 
                 Keep track of your training progress in the <strong>Goals In Progress</strong> section. Each time you work on a 
-                skill, click <strong>Add Progress</strong> to log your training progress. Once you and your pup 
+                skill, click <strong>Add Progress</strong> to log your training progress. To view the progress of a single goal, click <strong>View Progress</strong>. Once you and your pup 
                 have mastered a goal, click the <strong>Completed</strong> button to add it to your collection of completed skills.</p>
                 <GoalsInProgress goalsinprogress={profile.goalsinprogress} profile={profile} />
                 <GoalsCompleted goalsinprogress={profile.goalsinprogress} completedGoals={profile.completedgoals} profile={profile} />
