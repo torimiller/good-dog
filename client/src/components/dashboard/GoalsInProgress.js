@@ -78,7 +78,8 @@ class GoalsInProgress extends React.Component {
                 <td>
                 <button 
                     className='btn btn-success btn-goals' 
-                    onClick={() => {
+                    onClick={(event) => {
+                        event.preventDefault();
                         currentGoalId = edu._id;
                         this.setState({
                             editGoal: true,
@@ -186,7 +187,7 @@ class GoalsInProgress extends React.Component {
                     }}>
 
                         <fieldset className="form-fieldset">
-                        <legend className="lead"><i className="fas fa-dog" alt=""></i> Add New Entry for {this.state.goal}</legend>
+                        <legend className="lead"><i className="fas fa-dog" alt=""></i> Add New Progress Entry for {this.state.goal}</legend>
                             <div class="form-group">
                                 <label for="date">Today's Date</label>
                                 <input type="date" placeholder="Date" name="date" value={this.state.date} onChange={this.handleDate} />

@@ -47,7 +47,3 @@ Profile
     DELETE api/profile/goalsinprogress/:edu_id to delete goal in progress from profile
     PUT api/profile/completedgoals to add a goal in progress to completed goals
     DELETE api/profile/completedgoals/:edu_id to delete completed goal from profile
-
-
-Include screenshot(s) of your app. This makes your app description much easier to understand.
-DASHBOARD:
