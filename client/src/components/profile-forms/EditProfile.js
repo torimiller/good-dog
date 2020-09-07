@@ -9,10 +9,6 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
         dogName: ''
     });
 
-    const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
-    console.log('EditProfile profile:', profile)
-
     useEffect(() => {
         getCurrentProfile();
 

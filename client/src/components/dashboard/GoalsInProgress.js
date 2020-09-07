@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
+//import Moment from 'react-moment';
 import PropTypes from 'prop-types'
 import { deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } from '../../actions/profile';
-import profile from '../../reducers/profile';
+// import profile from '../../reducers/profile';
 
 // goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
@@ -64,7 +64,6 @@ class GoalsInProgress extends React.Component {
             let notes;
 
             edu.progress.map(progress => {
-                console.log('progress:', progress)
                 if (progress.date !== null) {
                     date = progress.date.toString().split('').slice(0, 10).join('');
                 }
@@ -142,9 +141,6 @@ class GoalsInProgress extends React.Component {
         })
 
         progresses.shift();
-
-        console.log('progresses', progresses)
-        //console.log('goalProgress:', goalProgress)
 
         return (
             <Fragment>

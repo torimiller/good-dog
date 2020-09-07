@@ -20,7 +20,7 @@ const CreateProfile = ({ createProfile, history }) => {
         // instagram: ''
     });
 
-    const [displaySocialInputs, toggleSocialInputs] = useState(false);
+    //const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
     const {
         //company,

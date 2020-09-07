@@ -26,9 +26,6 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
     const { goal, progress: { date, timepracticed, notes } } = formData;
 
     const onChange = e => {
-        console.log('onChange e.target:', e.target);
-        console.log('onChange e.target.name:', e.target.name);
-        console.log('onChange e.target.value:', e.target.value);
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
@@ -80,7 +77,6 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                     <legend className="lead"><i className="fas fa-dog" alt=""></i> Add a skill you would like to teach your dog</legend>
                     <div className="form-group">
                 <select name="goal" value={goal} onChange={e => onChange(e)}>
-                    {console.log('goal:', goal)}
                     <option value="0">Choose from a list of skills</option>
                     <option value="Sit">Sit</option>
                     <option value="Stay">Stay</option>
