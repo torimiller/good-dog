@@ -1,6 +1,7 @@
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: rgb(92, 106, 242);
+  --primary-button: linear-gradient(225deg, rgba(84,112,204,1) 0%, rgba(67,83,243,1) 100%);
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -22,7 +23,7 @@ body {
 }
 
 a {
-  color: var(--primary-color);
+  color: ;
   text-decoration: none;
 }
 
@@ -143,8 +144,7 @@ img {
 .btn-goals {
   width: 100%;
   color: #fff;
-  background: rgb(84,112,204);
-  background: linear-gradient(225deg, rgba(84,112,204,1) 0%, rgba(67,83,243,1) 100%);
+  background: var(--primary-button);
   border-radius: 15px;
 }
 
@@ -181,12 +181,22 @@ img {
   color: #fff;
 }
 
+.btn-primary {
+  color: #fff;
+  background: var(--primary-button);
+  border-radius: 10px;
+}
+
 .btn-light,
 .bg-light,
 .badge-light,
 .alert-light {
   background: #CBDBD7;
   color: #333;
+}
+
+.btn-light {
+  border-radius: 10px;
 }
 
 .btn-dark,
@@ -337,7 +347,7 @@ button {
   z-index: 1;
   width: 100%;
   top: 0;
-  border-bottom: solid 1px var(--primary-color);
+  border-bottom: solid 1px rgba(84,112,204,1);
   opacity: 0.9;
 }
 
@@ -379,7 +389,7 @@ button {
 }
 
 .header-h1 {
-  color: rgba(67,83,243,1);
+  color: var(--primary-color);
   margin-top: 20px;
 }
 
@@ -628,9 +638,10 @@ button {
   margin-top: 50px;
 }
 
-/* .goal-btn {
-  margin-top: 30px;
-} */
+.goal-btn {
+  color: #41455e;
+  border-radius: 15px;
+}
 
 .view-progress-h3, .add-entry-h3 {
   margin-top: 20px;
