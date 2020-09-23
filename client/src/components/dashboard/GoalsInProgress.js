@@ -123,7 +123,7 @@ class GoalsInProgress extends React.Component {
                 <td>
                     <button onClick={() => {
                         deleteGoalInProgress(edu._id)
-                    }} className='btn btn-danger btn-goals'>Delete</button>
+                    }} className='btn btn-delete btn-goals'>Delete</button>
                 </td>
             </tr>
         )});

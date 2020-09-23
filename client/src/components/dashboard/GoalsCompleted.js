@@ -29,7 +29,7 @@ class GoalsCompleted extends React.Component {
                 <td>{goalCompleted.goal}</td>
                 <td>
                 <button 
-                    className='btn btn-success btn-goals' 
+                    className='btn btn-goals' 
                     onClick={() => {
 
                         goalCompleted.progress.map(progress => {
@@ -51,7 +51,7 @@ class GoalsCompleted extends React.Component {
                 <td>
                     <button onClick={() => {
                         deleteCompletedGoal(goalCompleted._id)
-                    }} className='btn btn-danger'>Delete</button>
+                    }} className='btn btn-delete'>Delete</button>
                 </td>
             </tr>
         )});

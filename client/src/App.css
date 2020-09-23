@@ -142,6 +142,18 @@ img {
 
 .btn-goals {
   width: 100%;
+  color: #fff;
+  background: rgb(84,112,204);
+  background: linear-gradient(225deg, rgba(84,112,204,1) 0%, rgba(67,83,243,1) 100%);
+  border-radius: 15px;
+}
+
+.btn-delete {
+  width: 100%;
+  color: #fff;
+  background: rgb(196,46,46);
+  background: linear-gradient(225deg, rgba(196,46,46,1) 0%, rgba(201,76,76,1) 100%);
+  border-radius: 15px;
 }
 
 .badge {
@@ -193,7 +205,7 @@ img {
   color: #fff;
 }
 
-.btn-success,
+/* .btn-success, */
 .bg-success,
 .badge-success,
 .alert-success {
@@ -367,6 +379,7 @@ button {
 }
 
 .header-h1 {
+  color: rgba(67,83,243,1);
   margin-top: 20px;
 }
 
