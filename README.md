@@ -2,22 +2,33 @@
 
 Good Dog is an application that gives you the ability to keep track of your dog's training progress. Build a custom set of goals to teach your dog, either by choosing from our list of skills, or creating your own. Each session of training can be logged for each goal. When your pup has mastered the skill, you can add it to your collection of completed goals.
 
+---
 
 FUNCTIONALITY
 
 Good Dog's functionality includes:
+
 Access to demo accounts to try the app out before signing up
+
 Sign up as a new user
+
 Login as an existing user
+
 Ability to create a custom set of goals
+
 Ability to log training progress for existing goals
+
 Ability to change goals in progress to completed goals
+
 Ability to delete goals in progress and completed goals
 
+---
 
 APPLICATION WEBSITE
+
 View a working prototype here: (https://mysterious-retreat-15685.herokuapp.com/)
 
+---
 
 SECURITY
 Application uses JWT authentication
