@@ -23,7 +23,7 @@ body {
 }
 
 a {
-  color: ;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -61,7 +61,8 @@ img {
 
 .lead {
   font-size: 1.25rem;
-  margin-bottom: 1rem;
+  width: 70%;
+  margin: 20px 0 30px 0;
 }
 
 .text-center {

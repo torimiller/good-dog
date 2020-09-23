@@ -12,9 +12,9 @@ const Landing = ({ isAuthenticated }) => {
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1 className="x-large">PuppyPal</h1>
+          <h1 className="x-large">Good Dog</h1>
           <p className="lead">
-            Keep track of your dog's training progress with PuppyPal! Build a custom set of goals
+            Keep track of your dog's training progress with <strong>Good Dog</strong>. Build a custom set of goals
             to teach your dog, either by choosing from our list of skills, or creating your own. Each 
             session of training can be logged for each goal. When your pup has mastered the skill,
             you can add it to your collection of completed goals!

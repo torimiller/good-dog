@@ -43,7 +43,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <h1>
         <Link to='/'>
         <img style={logoStyle} className="dog-logo" src={logo} alt="dog-icon"/>
-            PuppyPal
+            Good Dog
         </Link>
       </h1>
       { !loading && (<Fragment>{ isAuthenticated ? authLinks: guestLinks }</Fragment>) }
