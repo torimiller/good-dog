@@ -1,4 +1,5 @@
 node_modules/
 config/default.json
+app_screenshots/.DS_Store
 .DS_Store
 .env
