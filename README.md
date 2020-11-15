@@ -20,7 +20,7 @@ Good Dog's functionality includes:
 
 ## APPLICATION WEBSITE ##
 
-View a working prototype here: (https://mysterious-retreat-15685.herokuapp.com/)
+View a working prototype here: (https://good-dog-app.herokuapp.com/)
 
 ---
 
