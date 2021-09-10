@@ -6,67 +6,59 @@ import { addGoalInProgress } from '../../actions/profile';
 
 const AddGoalInProgress = ({ addGoalInProgress, history }) => {
     const [formData, setFormData] = useState({
-        // school: '',
-        // degree: '',
-        // fieldofstudy: '',
-        // from: '',
-        // to: '',
-        // current: false,
-        // description: '',
         goal: '',
-        progress: {
-            date: '',
-            timepracticed: '',
-            notes: ''
-        }
+        // progress: {
+        //     date: '',
+        //     timepracticed: '',
+        //     notes: ''
+        // }
+        progress: []
     });
 
     const [toDateDisabled, toggleDisabled] = useState(false);
 
-    const { goal, progress: { date, timepracticed, notes } } = formData;
+    const { goal, progress } = formData;
+    // const { goal, progress: { date, timepracticed, notes } } = formData;
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const onDateChange = e => {
-        setFormData({
-            ...formData, 
-            progress: {
-                ...formData.progress,
-                date: e.target.value
-            }
-        })
-    }
+    // const onDateChange = e => {
+    //     setFormData({
+    //         ...formData, 
+    //         progress: {
+    //             ...formData.progress,
+    //             date: e.target.value
+    //         }
+    //     })
+    // }
 
-    const onTimeChange = e => {
-        setFormData({
-            ...formData, 
-            progress: {
-                ...formData.progress,
-                timepracticed: e.target.value
-            }
-        })
-    }
+    // const onTimeChange = e => {
+    //     setFormData({
+    //         ...formData, 
+    //         progress: {
+    //             ...formData.progress,
+    //             timepracticed: e.target.value
+    //         }
+    //     })
+    // }
 
-    const onNotesChange = e => {
-        setFormData({
-            ...formData, 
-            progress: {
-                ...formData.progress,
-                notes: e.target.value
-            }
-        })
-    }
+    // const onNotesChange = e => {
+    //     setFormData({
+    //         ...formData, 
+    //         progress: {
+    //             ...formData.progress,
+    //             notes: e.target.value
+    //         }
+    //     })
+    // }
 
     return (
         <Fragment>
-            <h1 class="large text-primary">
+            <h1 className="large text-primary">
                 Add Your Training Goals
             </h1>
-            {/* <p class="lead">
-            <i class="fas fa-dog" alt=""></i> Add a skill you would like to teach your dog
-            </p> */}
             
             <form className="form" onSubmit={e => {
                     e.preventDefault();
@@ -113,7 +105,7 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                     value={notes} onChange={e => onNotesChange(e)}
                 ></textarea>
                 </div> */}
-                <input type="submit" class="btn btn-primary my-1" />
+                <input type="submit" className="btn btn-primary my-1" />
                 <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
                 </fieldset>
                 

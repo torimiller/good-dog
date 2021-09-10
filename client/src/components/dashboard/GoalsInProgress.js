@@ -58,6 +58,7 @@ class GoalsInProgress extends React.Component {
         const goalArrayLength = this.props.goalsinprogress.length;
         var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
         let currentGoalId;
+        {console.log('GoalsInProgress goalsinprogress:', goalsinprogress)}
         const educations = goalsinprogress.map(edu => {
             let date;
             let timepracticed;
@@ -167,14 +168,17 @@ class GoalsInProgress extends React.Component {
                     {/* Editing current goal */}
                     {this.state.editGoal && (
                     <div>
-                    <form class="form" onSubmit={e => {
+                    <form className="form" onSubmit={e => {
                         e.preventDefault();
                         let id = this.state.goalId;
                         let progress = {date: this.state.date, timepracticed: this.state.timepracticed, notes: this.state.notes}
                         updateGoalInProgress(id, progress)
                         this.setState({
                             editGoal: false,
-                            goalId: ''
+                            goalId: '',
+                            date: '',
+                            timepracticed: '',
+                            notes: ''
                         });
                         window.scrollTo({
                             top: 0,
@@ -184,15 +188,15 @@ class GoalsInProgress extends React.Component {
 
                         <fieldset className="form-fieldset">
                         <legend className="lead"><i className="fas fa-dog" alt=""></i> Add New Progress Entry for {this.state.goal}</legend>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="date">Today's Date</label>
                                 <input type="date" placeholder="Date" name="date" value={this.state.date} onChange={this.handleDate} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="time-practiced">Time Practiced</label>
                                 <input type="text" placeholder="Example: 20 minutes" name="timepracticed" value={this.state.timepracticed} onChange={this.handleTimePracticed} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="notes">Notes</label>
                                 <textarea
                                     name="notes"

@@ -31,6 +31,7 @@ class GoalsCompleted extends React.Component {
                 <button 
                     className='btn btn-goals' 
                     onClick={() => {
+                        {console.log('GoalsCompleted goalCompleted:', goalCompleted)}
 
                         goalCompleted.progress.map(progress => {
                             date = progress.date.toString().split('').slice(0, 10).join('');
