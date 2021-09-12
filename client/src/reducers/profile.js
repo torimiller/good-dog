@@ -14,6 +14,7 @@ export default function(state = initialState, action) {
     switch(type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
+            console.log('UPDATE_PROFILE payload:', payload)
             return {
                 ...state,
                 profile: payload,

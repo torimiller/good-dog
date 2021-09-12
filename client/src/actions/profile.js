@@ -13,6 +13,7 @@ import {
 export const getCurrentProfile = () => async dispatch => {
     try {
         const res = await axios.get('/api/profile/me');
+        console.log('getCurrentProfile res.data:', res.data)
 
         dispatch({
             type: GET_PROFILE,
@@ -135,6 +136,7 @@ export const updateGoalInProgress = (id, progress) => async dispatch => {
 
 // Delete goal in progress
 export const deleteGoalInProgress = id => async dispatch => {
+    console.log('actions profile deleteGoalInProgress id:', id)
     if(window.confirm('Are you sure you want to delete this goal?')) {
         try {
             const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);

@@ -45,11 +45,11 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
         <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
       </form>
-      <divmy-2 className="delete-account-btn-container">
+      {/* <divmy-2 className="delete-account-btn-container">
           <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
               <i className="fas fa-user-minus" alt=""></i> Delete My Account
           </button>
-      </divmy-2>
+      </divmy-2> */}
       </section>
     </Fragment>
     )
@@ -57,7 +57,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
 
 EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
-    deleteAccount: PropTypes.func.isRequired,
+    // deleteAccount: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
 };

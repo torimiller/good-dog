@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-//import Moment from 'react-moment';
 import PropTypes from 'prop-types'
 import { deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } from '../../actions/profile';
-// import profile from '../../reducers/profile';
 
-// goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
     constructor(props) {
         super(props);
@@ -58,12 +55,12 @@ class GoalsInProgress extends React.Component {
         const goalArrayLength = this.props.goalsinprogress.length;
         var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
         let currentGoalId;
-        const educations = goalsinprogress.map(edu => {
+        const progressGoals = goalsinprogress.map(item => {
             let date;
             let timepracticed;
             let notes;
 
-            edu.progress.map(progress => {
+            item.progress.map(progress => {
                 if (progress.date !== null) {
                     date = progress.date.toString().split('').slice(0, 10).join('');
                 }
@@ -72,18 +69,18 @@ class GoalsInProgress extends React.Component {
             })
 
             return (
-            <tr key={edu._id}>
-                <td>{edu.goal}</td>
+            <tr key={item._id}>
+                <td>{item.goal}</td>
                 <td>
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={(event) => {
                         event.preventDefault();
-                        currentGoalId = edu._id;
+                        currentGoalId = item._id;
                         this.setState({
                             editGoal: true,
-                            goal: `${edu.goal}`,
-                            goalId: `${edu._id}`
+                            goal: `${item.goal}`,
+                            goalId: `${item._id}`
                         });
                     }}>Add Progress</button>
                 </td>
@@ -91,7 +88,7 @@ class GoalsInProgress extends React.Component {
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        edu.progress.map(progress => {
+                        item.progress.map(progress => {
                             if (progress.date !== null) {
                                 date = progress.date.toString().split('').slice(0, 10).join('');
                             }
@@ -103,8 +100,8 @@ class GoalsInProgress extends React.Component {
 
                         this.setState({
                             viewProgress: true,
-                            goal: `${edu.goal}`,
-                            goalId: `${edu._id}`
+                            goal: `${item.goal}`,
+                            goalId: `${item._id}`
                         })
                     }}>View Progress</button>
                 </td>
@@ -112,7 +109,7 @@ class GoalsInProgress extends React.Component {
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        addCompletedGoal(edu, edu._id);
+                        addCompletedGoal(item, item._id);
                         window.scrollTo({
                             top: 0,
                             behavior: "smooth"
@@ -122,7 +119,8 @@ class GoalsInProgress extends React.Component {
                 </td>
                 <td>
                     <button onClick={() => {
-                        deleteGoalInProgress(edu._id)
+                        console.log('deleted item:', item)
+                        deleteGoalInProgress(item._id)
                     }} className='btn btn-delete btn-goals'>Delete</button>
                 </td>
             </tr>
@@ -167,14 +165,17 @@ class GoalsInProgress extends React.Component {
                     {/* Editing current goal */}
                     {this.state.editGoal && (
                     <div>
-                    <form class="form" onSubmit={e => {
+                    <form className="form" onSubmit={e => {
                         e.preventDefault();
                         let id = this.state.goalId;
                         let progress = {date: this.state.date, timepracticed: this.state.timepracticed, notes: this.state.notes}
                         updateGoalInProgress(id, progress)
                         this.setState({
                             editGoal: false,
-                            goalId: ''
+                            goalId: '',
+                            date: '',
+                            timepracticed: '',
+                            notes: ''
                         });
                         window.scrollTo({
                             top: 0,
@@ -184,15 +185,15 @@ class GoalsInProgress extends React.Component {
 
                         <fieldset className="form-fieldset">
                         <legend className="lead"><i className="fas fa-dog" alt=""></i> Add New Progress Entry for {this.state.goal}</legend>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="date">Today's Date</label>
                                 <input type="date" placeholder="Date" name="date" value={this.state.date} onChange={this.handleDate} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="time-practiced">Time Practiced</label>
                                 <input type="text" placeholder="Example: 20 minutes" name="timepracticed" value={this.state.timepracticed} onChange={this.handleTimePracticed} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="notes">Notes</label>
                                 <textarea
                                     name="notes"
@@ -243,7 +244,7 @@ class GoalsInProgress extends React.Component {
                         </div>
                     )}
 
-                    {!this.state.editGoal && !this.state.viewProgress && <tbody>{educations}</tbody>}
+                    {!this.state.editGoal && !this.state.viewProgress && <tbody>{progressGoals}</tbody>}
                 </table>
             </Fragment>
         )

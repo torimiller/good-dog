@@ -154,10 +154,10 @@ router.put('/goalsinprogress', [ auth, [
     }
 });
 
-// @route   PUT api/profile/goalsinprogress/:edu_id
+// @route   PUT api/profile/goalsinprogress/:item_id
 // @desc    Update goal progress
 // @access  Private
-router.put('/goalsinprogress/:edu_id', auth, async (req, res) => {
+router.put('/goalsinprogress/:item_id', auth, async (req, res) => {
     const {
         date,
         timepracticed,
@@ -171,13 +171,11 @@ router.put('/goalsinprogress/:edu_id', auth, async (req, res) => {
     }
 
     try {
-        // getting the profile of the logged in user
         const profile = await Profile.findOne({ user: req.user.id });
-        
-        const updateIndex = profile.goalsinprogress.map(item => item.id).indexOf(req.params.edu_id);
+
+        const updateIndex = profile.goalsinprogress.map(item => item.id).indexOf(req.params.item_id);
 
         profile.goalsinprogress[updateIndex].progress.push(newProgress)
-
 
         await profile.save();
 
@@ -188,18 +186,16 @@ router.put('/goalsinprogress/:edu_id', auth, async (req, res) => {
     }
 });
 
-// @route   DELETE api/profile/goalsinprogress/:edu_id
+// @route   DELETE api/profile/goalsinprogress/:item_id
 // @desc    Delete goal in progress from profile
 // @access  Private
-router.delete('/goalsinprogress/:edu_id', auth, async (req, res) => {
+router.delete('/goalsinprogress/:item_id', auth, async (req, res) => {
     try {
         // getting the profile of the logged in user
         const profile = await Profile.findOne({ user: req.user.id });
 
-        // Get remove index
-        const removeIndex = profile.goalsinprogress.map(item => item.id).indexOf(req.params.exp_id);
+        const removeIndex = profile.goalsinprogress.map(item => item.id).indexOf(req.params.item_id);
 
-        // splicing out the index
         profile.goalsinprogress.splice(removeIndex, 1);
 
         await profile.save();
@@ -251,18 +247,15 @@ router.put('/completedgoals', [ auth, [
 });
 
 
-// @route   DELETE api/profile/completedgoals/:edu_id
+// @route   DELETE api/profile/completedgoals/:item_id
 // @desc    Delete completed goal from profile
 // @access  Private
-router.delete('/completedgoals/:edu_id', auth, async (req, res) => {
+router.delete('/completedgoals/:item_id', auth, async (req, res) => {
     try {
-        // getting the profile of the logged in user
         const profile = await Profile.findOne({ user: req.user.id });
 
-        // Get remove index
-        const removeIndex = profile.completedgoals.map(item => item.id).indexOf(req.params.exp_id);
+        const removeIndex = profile.completedgoals.map(item => item.id).indexOf(req.params.item_id);
 
-        // splicing out the index
         profile.completedgoals.splice(removeIndex, 1);
 
         await profile.save();
