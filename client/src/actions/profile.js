@@ -136,6 +136,7 @@ export const updateGoalInProgress = (id, progress) => async dispatch => {
 
 // Delete goal in progress
 export const deleteGoalInProgress = id => async dispatch => {
+    console.log('actions profile deleteGoalInProgress id:', id)
     if(window.confirm('Are you sure you want to delete this goal?')) {
         try {
             const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);

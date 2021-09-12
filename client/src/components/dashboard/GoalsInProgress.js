@@ -55,13 +55,12 @@ class GoalsInProgress extends React.Component {
         const goalArrayLength = this.props.goalsinprogress.length;
         var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
         let currentGoalId;
-        {console.log('GoalsInProgress goalsinprogress:', goalsinprogress)}
-        const progressGoals = goalsinprogress.map(edu => {
+        const progressGoals = goalsinprogress.map(item => {
             let date;
             let timepracticed;
             let notes;
 
-            edu.progress.map(progress => {
+            item.progress.map(progress => {
                 if (progress.date !== null) {
                     date = progress.date.toString().split('').slice(0, 10).join('');
                 }
@@ -70,18 +69,18 @@ class GoalsInProgress extends React.Component {
             })
 
             return (
-            <tr key={edu._id}>
-                <td>{edu.goal}</td>
+            <tr key={item._id}>
+                <td>{item.goal}</td>
                 <td>
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={(event) => {
                         event.preventDefault();
-                        currentGoalId = edu._id;
+                        currentGoalId = item._id;
                         this.setState({
                             editGoal: true,
-                            goal: `${edu.goal}`,
-                            goalId: `${edu._id}`
+                            goal: `${item.goal}`,
+                            goalId: `${item._id}`
                         });
                     }}>Add Progress</button>
                 </td>
@@ -89,7 +88,7 @@ class GoalsInProgress extends React.Component {
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        edu.progress.map(progress => {
+                        item.progress.map(progress => {
                             if (progress.date !== null) {
                                 date = progress.date.toString().split('').slice(0, 10).join('');
                             }
@@ -101,8 +100,8 @@ class GoalsInProgress extends React.Component {
 
                         this.setState({
                             viewProgress: true,
-                            goal: `${edu.goal}`,
-                            goalId: `${edu._id}`
+                            goal: `${item.goal}`,
+                            goalId: `${item._id}`
                         })
                     }}>View Progress</button>
                 </td>
@@ -110,7 +109,7 @@ class GoalsInProgress extends React.Component {
                 <button 
                     className='btn btn-success btn-goals' 
                     onClick={() => {
-                        addCompletedGoal(edu, edu._id);
+                        addCompletedGoal(item, item._id);
                         window.scrollTo({
                             top: 0,
                             behavior: "smooth"
@@ -120,7 +119,8 @@ class GoalsInProgress extends React.Component {
                 </td>
                 <td>
                     <button onClick={() => {
-                        deleteGoalInProgress(edu._id)
+                        console.log('deleted item:', item)
+                        deleteGoalInProgress(item._id)
                     }} className='btn btn-delete btn-goals'>Delete</button>
                 </td>
             </tr>
