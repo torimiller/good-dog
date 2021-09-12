@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-//import Moment from 'react-moment';
 import PropTypes from 'prop-types'
 import { deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } from '../../actions/profile';
-// import profile from '../../reducers/profile';
 
-// goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsInProgress extends React.Component {
     constructor(props) {
         super(props);
@@ -59,7 +56,7 @@ class GoalsInProgress extends React.Component {
         var { profile, goalsinprogress, deleteGoalInProgress, updateGoalInProgress, addCompletedGoal } = this.props;
         let currentGoalId;
         {console.log('GoalsInProgress goalsinprogress:', goalsinprogress)}
-        const educations = goalsinprogress.map(edu => {
+        const progressGoals = goalsinprogress.map(edu => {
             let date;
             let timepracticed;
             let notes;
@@ -247,7 +244,7 @@ class GoalsInProgress extends React.Component {
                         </div>
                     )}
 
-                    {!this.state.editGoal && !this.state.viewProgress && <tbody>{educations}</tbody>}
+                    {!this.state.editGoal && !this.state.viewProgress && <tbody>{progressGoals}</tbody>}
                 </table>
             </Fragment>
         )

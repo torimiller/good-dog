@@ -7,52 +7,17 @@ import { addGoalInProgress } from '../../actions/profile';
 const AddGoalInProgress = ({ addGoalInProgress, history }) => {
     const [formData, setFormData] = useState({
         goal: '',
-        // progress: {
-        //     date: '',
-        //     timepracticed: '',
-        //     notes: ''
-        // }
         progress: []
     });
 
     const [toDateDisabled, toggleDisabled] = useState(false);
 
     const { goal, progress } = formData;
-    // const { goal, progress: { date, timepracticed, notes } } = formData;
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    // const onDateChange = e => {
-    //     setFormData({
-    //         ...formData, 
-    //         progress: {
-    //             ...formData.progress,
-    //             date: e.target.value
-    //         }
-    //     })
-    // }
-
-    // const onTimeChange = e => {
-    //     setFormData({
-    //         ...formData, 
-    //         progress: {
-    //             ...formData.progress,
-    //             timepracticed: e.target.value
-    //         }
-    //     })
-    // }
-
-    // const onNotesChange = e => {
-    //     setFormData({
-    //         ...formData, 
-    //         progress: {
-    //             ...formData.progress,
-    //             notes: e.target.value
-    //         }
-    //     })
-    // }
 
     return (
         <Fragment>
@@ -62,7 +27,6 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
             
             <form className="form" onSubmit={e => {
                     e.preventDefault();
-                    //setFormData({...formData, progress: date, timepracticed, notes})
                     addGoalInProgress(formData, history);
                 }}>
                 <fieldset className="form-fieldset">
@@ -87,24 +51,6 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
                 </select>
                 </div>
                 {goal === 'Create Your Own!' ? <input type="text" placeholder="Goal" name="goal" /> : <input type="text" placeholder="Goal" name="goal" value={goal} onChange={e => onChange(e)} />}
-                {/* <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" placeholder="Date" name="date" value={date} onChange={e => onDateChange(e)} />
-                </div> */}
-                {/* <div class="form-group">
-                <label for="time-practiced">Time Practiced</label>
-                <input type="text" placeholder="15 Minutes" name="timepracticed" value={timepracticed} onChange={e => onTimeChange(e)} />
-                </div> */}
-                {/* <div class="form-group">
-                <label for="notes">Notes</label>
-                <textarea
-                    name="notes"
-                    cols="30"
-                    rows="5"
-                    placeholder="Dog responded to command, but only when treat was in sight."
-                    value={notes} onChange={e => onNotesChange(e)}
-                ></textarea>
-                </div> */}
                 <input type="submit" className="btn btn-primary my-1" />
                 <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
                 </fieldset>
