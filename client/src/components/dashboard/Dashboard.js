@@ -8,12 +8,11 @@ import GoalsInProgress from './GoalsInProgress';
 import GoalsCompleted from './GoalsCompleted';
 import { getCurrentProfile } from '../../actions/profile';
 
-const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }, props) => {
+const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
 
-    // If the profile is null and it's still loading, we want to show the spinner
     return loading && profile === null ? <Spinner /> : <Fragment>
         <h1 className="large text-primary header-h1">Dashboard</h1>
         <p className="lead">

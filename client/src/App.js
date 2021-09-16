@@ -9,11 +9,9 @@ import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
-//import AddExperience from './components/profile-forms/AddExperience';
 import AddGoalInProgress from './components/profile-forms/AddGoalInProgress';
 import Profile from './components/profile/Profile';
 import PrivateRoute from './components/routing/PrivateRoute';
-// Redux
 // Provider combines React and Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -34,7 +32,6 @@ const App = () => {
 
   return (
     <Provider store={store}>
-    {/* fragment is a ghost element that won't show up in the dom */}
     <Router>
       <Fragment>
         <Navbar />

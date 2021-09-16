@@ -4,16 +4,13 @@ import { setAlert } from './alert';
 import {
     GET_PROFILE,
     PROFILE_ERROR, 
-    UPDATE_PROFILE,
-    CLEAR_PROFILE,
-    ACCOUNT_DELETED
+    UPDATE_PROFILE
 } from './types';
 
 // Get current users profile
 export const getCurrentProfile = () => async dispatch => {
     try {
         const res = await axios.get('/api/profile/me');
-        console.log('getCurrentProfile res.data:', res.data)
 
         dispatch({
             type: GET_PROFILE,
@@ -136,7 +133,6 @@ export const updateGoalInProgress = (id, progress) => async dispatch => {
 
 // Delete goal in progress
 export const deleteGoalInProgress = id => async dispatch => {
-    console.log('actions profile deleteGoalInProgress id:', id)
     if(window.confirm('Are you sure you want to delete this goal?')) {
         try {
             const res = await axios.delete(`/api/profile/goalsinprogress/${id}`);
@@ -180,8 +176,6 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
                     type: UPDATE_PROFILE,
                     payload: res.data
                 })
-        
-                //dispatch(setAlert('Goal Removed', 'success'));
             } catch (err) {
                 dispatch({
                     type: PROFILE_ERROR,
@@ -203,7 +197,6 @@ export const addCompletedGoal = (goal, id) => async dispatch => {
             }); 
         }
     }
-    
 }
 
 
@@ -230,21 +223,20 @@ export const deleteCompletedGoal = id => async dispatch => {
 
 
 // Delete account & profile
-export const deleteAccount = () => async dispatch => {
-    if(window.confirm('Are you sure? This can NOT be undone!')) {
-        try {
-            await axios.delete('/api/profile');
+// export const deleteAccount = () => async dispatch => {
+//     if(window.confirm('Are you sure? This can NOT be undone!')) {
+//         try {
+//             await axios.delete('/api/profile');
 
-            dispatch({ type: CLEAR_PROFILE })
-            dispatch({ type: ACCOUNT_DELETED })
+//             dispatch({ type: CLEAR_PROFILE })
+//             dispatch({ type: ACCOUNT_DELETED })
     
-            dispatch(setAlert('Your account has been permanently deleted'));
-        } catch (err) {
-            dispatch({
-                type: PROFILE_ERROR,
-                payload: { msg: err.response.statusText, status: err.response.status }
-            }); 
-        }
-    }
-  
-};
+//             dispatch(setAlert('Your account has been permanently deleted'));
+//         } catch (err) {
+//             dispatch({
+//                 type: PROFILE_ERROR,
+//                 payload: { msg: err.response.statusText, status: err.response.status }
+//             }); 
+//         }
+//     }
+// };

@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator/check');
-
+const { validationResult } = require('express-validator');
 const Profile = require('../../models/Profile');
-const User = require('../../models/User');
-//const Post = require('../../models/Post');
 
 // @route   GET api/profile/me
 // @desc    Get current user's profile
@@ -57,7 +54,6 @@ router.post('/', [ auth ],
                     { $set: profileFields },
                     { new: true }
                 );
-
                 return res.json(profile);
             }
 
@@ -92,49 +88,19 @@ router.get('/user/:user_id', async (req, res) => {
     }
 });
 
-// @route   DELETE api/profile
-// @desc    Delete profile & user
-// @access  Private
-router.delete('/', auth, async (req, res) => {
-    try {
-        // remove users posts
-        //await Post.deleteMany({ user: req.user.id });
-
-        // Remove profile
-        await Profile.findOneAndRemove({ user: req.user.id });
-
-        //Remove user
-        await User.findOneAndRemove({ _id: req.user.id });
-
-        res.json({ msg: 'User deleted' });
-        console.log('User deleted')
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
 
 // @route   PUT api/profile/goalsinprogress
 // @desc    Add goals in progress
 // @access  Private
 router.put('/goalsinprogress', [ auth, [
-    // check('goal', 'Goal is required').not().isEmpty(),
-    // check('date', 'Date is required').not().isEmpty(),
-    // check('timepracticed', 'Time practiced is required').not().isEmpty(),
-    // check('notes', 'Notes are required').not().isEmpty()
 ]], async (req, res) => {
-    // const errors = validationResult(req);
-    // if(!errors.isEmpty) {
-    //     return res.status(400).json({ errors: errors.array() });
-    // }
 
     const {
         goal,
         progress
     } = req.body;
 
-    const newEdu = {
+    const newGoal = {
         goal,
         progress
     }
@@ -143,7 +109,7 @@ router.put('/goalsinprogress', [ auth, [
         const profile = await Profile.findOne({ user: req.user.id });
 
         // unshift is the same as push except it pushes it to the beginning, not the end
-        profile.goalsinprogress.unshift(newEdu);
+        profile.goalsinprogress.unshift(newGoal);
 
         await profile.save();
 
@@ -211,15 +177,7 @@ router.delete('/goalsinprogress/:item_id', auth, async (req, res) => {
 // @desc    Add completed goal
 // @access  Private
 router.put('/completedgoals', [ auth, [
-    // check('goal', 'Goal is required').not().isEmpty(),
-    // check('date', 'Date is required').not().isEmpty(),
-    // check('timepracticed', 'Time practiced is required').not().isEmpty(),
-    // check('notes', 'Notes are required').not().isEmpty()
 ]], async (req, res) => {
-    // const errors = validationResult(req);
-    // if(!errors.isEmpty) {
-    //     return res.status(400).json({ errors: errors.array() });
-    // }
 
     const {
         goal,

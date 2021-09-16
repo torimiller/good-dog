@@ -6,12 +6,7 @@ import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
-    // the useState hook: formData is going to be the state, just like:
-    // state = { formData: {
-    //  } }
-    // setFormData is basically like this.setState and passing the form values in
     const [formData, setFormData] = useState({
-        // this is our initial state
         name: '',
         email: '',
         password: '',

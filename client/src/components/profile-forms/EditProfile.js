@@ -2,20 +2,16 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { createProfile, getCurrentProfile, deleteAccount } from '../../actions/profile';
+import { createProfile, getCurrentProfile } from '../../actions/profile';
 
 
-const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentProfile, deleteAccount, history }) => {
+const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentProfile, history }) => {
     const [formData, setFormData] = useState({
         dogName: ''
     });
 
     useEffect(() => {
         getCurrentProfile();
-
-        setFormData({
-            dogName: loading || !profile.dogName ? '' : profile.dogName
-        });
     }, [loading, getCurrentProfile]);
 
     const {
@@ -35,21 +31,16 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
         <h1 className="large text-primary">
             Edit Your Profile
         </h1>
-      <p className="lead">
-        What's your pup's name?
-      </p>
-      <form className="form" onSubmit={e => onSubmit(e)}>
-        <div className="form-group">
-          <input type="text" placeholder="Dog's Name" name="dogName" value={dogName} onChange={e => onChange(e)} />
-        </div>        
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
-      </form>
-      {/* <divmy-2 className="delete-account-btn-container">
-          <button className="btn btn-dange delete-account-btn" onClick={() => deleteAccount()}>
-              <i className="fas fa-user-minus" alt=""></i> Delete My Account
-          </button>
-      </divmy-2> */}
+        <p className="lead">
+            What's your pup's name?
+        </p>
+        <form className="form" onSubmit={e => onSubmit(e)}>
+            <div className="form-group">
+            <input type="text" placeholder="Dog's Name" name="dogName" value={dogName} onChange={e => onChange(e)} />
+            </div>        
+            <input type="submit" className="btn btn-primary my-1" />
+            <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
+        </form>
       </section>
     </Fragment>
     )
@@ -57,7 +48,6 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
 
 EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
-    // deleteAccount: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
 };
@@ -66,4 +56,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile, deleteAccount })(withRouter(EditProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));

@@ -1,30 +1,9 @@
   
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const expect = chai.expect;
-const app = require('../server');
-chai.use(chaiHttp);
-
-describe('POST /auth', function() {
-  // note there's no `done` parameter passed to `function()` below
-  it('should add a user on POST', function() {
-    // since we're returning `chai.request.get.then...`
-    // we don't need a `done` call back
-    const newUser = {
-      email: "test@test.com",
-      password: 123456
-    };
-
-    return chai
-      .request(app)
-      .post("/auth")
-      .send(newUser)
-      .then(function(res) {
-        expect(res).to.have.status(201);
-        expect(res).to.be.json;
-      });
-  });
-});
+// const chai = require("chai");
+// const chaiHttp = require("chai-http");
+// const expect = chai.expect;
+// const app = require('../server');
+// chai.use(chaiHttp);
 
 // it("should add a blog post on POST", function() {
 //   const newPost = {

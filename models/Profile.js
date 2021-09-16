@@ -11,22 +11,18 @@ const ProfileSchema = new mongoose.Schema({
     goalsinprogress: [
         {
         goal: {
-            type: String,
-            //required: true
+            type: String
         },
         progress: [
             {
                 date: {
-                    type: Date,
-                    //required: true
+                    type: Date
                 },
                 timepracticed: {
-                    type: String,
-                    //required: true
+                    type: String
                 },
                 notes: {
-                    type: String,
-                    //required: true
+                    type: String
                 }
             }
         ], 
@@ -35,22 +31,18 @@ const ProfileSchema = new mongoose.Schema({
     completedgoals: [
         {
         goal: {
-            type: String,
-            //required: true
+            type: String
         },
         progress: [
             {
                 date: {
-                    type: Date,
-                    //required: true
+                    type: Date
                 },
                 timepracticed: {
-                    type: String,
-                    //required: true
+                    type: String
                 },
                 notes: {
-                    type: String,
-                    //required: true
+                    type: String
                 }
             }
         ], 

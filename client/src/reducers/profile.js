@@ -1,4 +1,4 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE } from "../actions/types";
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from "../actions/types";
 
 const initialState = {
     profile: null,
@@ -14,7 +14,6 @@ export default function(state = initialState, action) {
     switch(type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
-            console.log('UPDATE_PROFILE payload:', payload)
             return {
                 ...state,
                 profile: payload,
@@ -27,14 +26,6 @@ export default function(state = initialState, action) {
                 loading: false,
                 profile: null
             };
-        case CLEAR_PROFILE:
-            console.log('CLEAR_PROFILE ran in profile reducer');
-            return {
-                ...state,
-                profile: null,
-                repos: [],
-                loading: false
-            }
         default:
             return state;
     }

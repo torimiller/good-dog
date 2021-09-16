@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
 import PropTypes from 'prop-types'
 import { deleteCompletedGoal } from '../../actions/profile';
 
-// goalsinprogress will be passed in from the parent component which is Dashboard.js
 class GoalsCompleted extends React.Component {
     constructor(props) {
         super(props);
@@ -17,9 +15,10 @@ class GoalsCompleted extends React.Component {
             completedGoalsExist: false
         }
     }
+
     render() {
         const completedGoalArrayLength = this.props.completedGoals.length;
-        var {goalsinprogress, completedGoals, deleteCompletedGoal} = this.props;
+        var {completedGoals, deleteCompletedGoal} = this.props;
         const goalsCompleted = completedGoals.map(goalCompleted => {
             let date;
             let timepracticed;
@@ -31,14 +30,12 @@ class GoalsCompleted extends React.Component {
                 <button 
                     className='btn btn-goals' 
                     onClick={() => {
-                        {console.log('GoalsCompleted goalCompleted:', goalCompleted)}
-
                         goalCompleted.progress.map(progress => {
                             date = progress.date.toString().split('').slice(0, 10).join('');
                             timepracticed = progress.timepracticed;
                             notes = progress.notes;
                             let currentProgress = {date: date, timepracticed: timepracticed, notes: notes}
-                            this.state.clickedProgress.push(currentProgress);
+                            return this.state.clickedProgress.push(currentProgress);
                         })
 
                         this.setState({
@@ -72,33 +69,32 @@ class GoalsCompleted extends React.Component {
                         </thead>
                 )}
                         
-                    {this.state.viewProgress && (
-                        
-                        <div>
-                            <h1>View Progress for {this.state.goal}</h1>
+                {this.state.viewProgress && ( 
+                    <div>
+                        <h1>View Progress for {this.state.goal}</h1>
 
-                            {this.state.clickedProgress.map(progress => {
-                                return (
-                                    <div className="goal-progress">
-                                        <p>Date: {progress.date}</p>
-                                        <p>Time Practiced: {progress.timepracticed}</p>
-                                        <p>Notes: {progress.notes}</p>
-                                    </div>
-                                )
-                            })}
+                        {this.state.clickedProgress.map(progress => {
+                            return (
+                                <div className="goal-progress">
+                                    <p>Date: {progress.date}</p>
+                                    <p>Time Practiced: {progress.timepracticed}</p>
+                                    <p>Notes: {progress.notes}</p>
+                                </div>
+                            )
+                        })}
 
-                            <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
-                                this.setState({
-                                    viewProgress: false,
-                                    clickedProgress: [],
-                                    goal: '',
-                                    goalId: ''
-                                })
-                            }}>Go Back</Link>
-                        </div>
-                    )}
+                        <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
+                            this.setState({
+                                viewProgress: false,
+                                clickedProgress: [],
+                                goal: '',
+                                goalId: ''
+                            })
+                        }}>Go Back</Link>
+                    </div>
+                )}
 
-                    {!this.state.viewProgress && <tbody>{goalsCompleted}</tbody>}
+                {!this.state.viewProgress && <tbody>{goalsCompleted}</tbody>}
                 </table>
             </Fragment>
         )
@@ -107,7 +103,6 @@ class GoalsCompleted extends React.Component {
 }
 
 GoalsCompleted.propTypes = {
-    goalsinprogress: PropTypes.array.isRequired,
     deleteCompletedGoal: PropTypes.func.isRequired
 }
 

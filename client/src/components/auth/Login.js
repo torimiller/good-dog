@@ -4,14 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 
-// since the action is a prop, we're going to destructure it so we don't have to do props.login
 const Login = ({ login, isAuthenticated }) => {
-    // the useState hook: formData is going to be the state, just like:
-    // state = { formData: {
-    //  } }
-    // setFormData is basically like this.setState and passing the form values in
     const [formData, setFormData] = useState({
-        // this is our initial state
         email: '',
         password: '',
     });
@@ -25,7 +19,6 @@ const Login = ({ login, isAuthenticated }) => {
         login(email, password);
     };
 
-    // Redirect if logged in
     if(isAuthenticated) {
         return <Redirect to="/dashboard" />
     }

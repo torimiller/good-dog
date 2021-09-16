@@ -10,9 +10,7 @@ const AddGoalInProgress = ({ addGoalInProgress, history }) => {
         progress: []
     });
 
-    const [toDateDisabled, toggleDisabled] = useState(false);
-
-    const { goal, progress } = formData;
+    const { goal } = formData;
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

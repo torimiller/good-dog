@@ -6,36 +6,10 @@ import { createProfile } from '../../actions/profile';
 
 const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
-        // company: '',
         dogName: ''
-        // location: '',
-        // status: '',
-        // skills: '',
-        // githubusername: '',
-        // bio: '',
-        // twitter: '',
-        // facebook: '',
-        // linkedin: '',
-        // youtube: '',
-        // instagram: ''
     });
 
-    //const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
-    const {
-        //company,
-        dogName
-        // location,
-        // status,
-        // skills,
-        // githubusername,
-        // bio,
-        // twitter,
-        // facebook,
-        // linkedin,
-        // youtube,
-        // instagram
-    } = formData;
+    const { dogName } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
