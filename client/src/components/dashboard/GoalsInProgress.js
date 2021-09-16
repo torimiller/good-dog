@@ -125,7 +125,6 @@ class GoalsInProgress extends React.Component {
         let progresses;
 
         progresses = this.state.clickedProgress.map((progress, index) => {
-            console.log('mapped progress:', progress)
             return (
                 <tr key={index} className="goal-progress">
                     <td className="td-20">{progress.date}</td>
@@ -134,8 +133,6 @@ class GoalsInProgress extends React.Component {
                 </tr>
             )
         })
-
-        progresses.shift();
 
         return (
             <Fragment>
@@ -223,7 +220,6 @@ class GoalsInProgress extends React.Component {
                                         <th>Notes</th>
                                     </tr>
                                 </thead>
-                                {console.log('progresses:', progresses)}
                                 <tbody>{progresses}</tbody>
                             </table>
 
