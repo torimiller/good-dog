@@ -37,6 +37,7 @@ const Login = ({ login, isAuthenticated }) => {
                 type="password"
                 placeholder="Password"
                 name="password"
+                autoComplete="off"
                 minLength="6"
                 value={password} 
                 onChange={e => onChange(e)}

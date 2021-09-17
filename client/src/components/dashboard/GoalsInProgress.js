@@ -196,7 +196,7 @@ class GoalsInProgress extends React.Component {
                                         value={this.state.notes} onChange={this.handleNotes}
                                     ></textarea>
                                 </div>
-                                <input type="submit" class="btn btn-primary my-1" />
+                                <input type="submit" className="btn btn-primary my-1" />
                                 <Link className="btn btn-light my-1" to="/dashboard" onClick={() => {
                                     this.setState({
                                     editGoal: false,

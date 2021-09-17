@@ -327,6 +327,12 @@ button {
   width: 100%;
 }
 
+.progress-header {
+  background: var(--light-color);
+  font-weight: bold;
+  padding: 1em;
+}
+
 .completed-table {
   width: 50%;
 }

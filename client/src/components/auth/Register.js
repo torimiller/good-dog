@@ -53,6 +53,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 type="password"
                 placeholder="Password"
                 name="password"
+                autoComplete="off"
                 value={password} 
                 onChange={e => onChange(e)}
                 />
@@ -62,6 +63,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 type="password"
                 placeholder="Confirm Password"
                 name="password2"
+                autoComplete="off"
                 value={password2} 
                 onChange={e => onChange(e)}
                 />
